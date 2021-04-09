@@ -1,0 +1,132 @@
+# this is an auto generated file. This will be overwritten
+query GetAssay($id: ID!) {
+  getAssay(id: $id) {
+    id
+    type
+    enzymeData {
+      protein
+      gene
+      concentrationSubstrate
+      concentrationTested
+      inhibition
+      ec50
+    }
+    ahrData {
+      ahrType
+    }
+    species
+    pmids
+    comment
+    chemicalID
+    createdAt
+    updatedAt
+    chemical {
+      id
+      cid
+      cas
+      iupac
+      inchikey
+      other_names
+      smiles
+      mw
+      createdAt
+      updatedAt
+      assays {
+        nextToken
+      }
+    }
+  }
+}
+query ListAssays(
+  $filter: ModelAssayFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listAssays(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      type
+      enzymeData {
+        protein
+        gene
+        concentrationSubstrate
+        concentrationTested
+        inhibition
+        ec50
+      }
+      ahrData {
+        ahrType
+      }
+      species
+      pmids
+      comment
+      chemicalID
+      createdAt
+      updatedAt
+      chemical {
+        id
+        cid
+        cas
+        iupac
+        inchikey
+        other_names
+        smiles
+        mw
+        createdAt
+        updatedAt
+      }
+    }
+    nextToken
+  }
+}
+query ListChemicals(
+  $filter: ModelChemicalFilterInput
+  $limit: Int
+  $nextToken: String
+) {
+  listChemicals(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    items {
+      id
+      cid
+      cas
+      iupac
+      inchikey
+      other_names
+      smiles
+      mw
+      createdAt
+      updatedAt
+      assays {
+        nextToken
+      }
+    }
+    nextToken
+  }
+}
+query GetChemical($id: ID!) {
+  getChemical(id: $id) {
+    id
+    cid
+    cas
+    iupac
+    inchikey
+    other_names
+    smiles
+    mw
+    createdAt
+    updatedAt
+    assays {
+      items {
+        id
+        type
+        species
+        pmids
+        comment
+        chemicalID
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+}

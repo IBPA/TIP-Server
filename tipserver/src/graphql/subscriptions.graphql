@@ -1,0 +1,196 @@
+# this is an auto generated file. This will be overwritten
+subscription OnCreateAssay {
+  onCreateAssay {
+    id
+    type
+    enzymeData {
+      protein
+      gene
+      concentrationSubstrate
+      concentrationTested
+      inhibition
+      ec50
+    }
+    ahrData {
+      ahrType
+    }
+    species
+    pmids
+    comment
+    chemicalID
+    createdAt
+    updatedAt
+    chemical {
+      id
+      cid
+      cas
+      iupac
+      inchikey
+      other_names
+      smiles
+      mw
+      createdAt
+      updatedAt
+      assays {
+        nextToken
+      }
+    }
+  }
+}
+subscription OnUpdateAssay {
+  onUpdateAssay {
+    id
+    type
+    enzymeData {
+      protein
+      gene
+      concentrationSubstrate
+      concentrationTested
+      inhibition
+      ec50
+    }
+    ahrData {
+      ahrType
+    }
+    species
+    pmids
+    comment
+    chemicalID
+    createdAt
+    updatedAt
+    chemical {
+      id
+      cid
+      cas
+      iupac
+      inchikey
+      other_names
+      smiles
+      mw
+      createdAt
+      updatedAt
+      assays {
+        nextToken
+      }
+    }
+  }
+}
+subscription OnDeleteAssay {
+  onDeleteAssay {
+    id
+    type
+    enzymeData {
+      protein
+      gene
+      concentrationSubstrate
+      concentrationTested
+      inhibition
+      ec50
+    }
+    ahrData {
+      ahrType
+    }
+    species
+    pmids
+    comment
+    chemicalID
+    createdAt
+    updatedAt
+    chemical {
+      id
+      cid
+      cas
+      iupac
+      inchikey
+      other_names
+      smiles
+      mw
+      createdAt
+      updatedAt
+      assays {
+        nextToken
+      }
+    }
+  }
+}
+subscription OnCreateChemical {
+  onCreateChemical {
+    id
+    cid
+    cas
+    iupac
+    inchikey
+    other_names
+    smiles
+    mw
+    createdAt
+    updatedAt
+    assays {
+      items {
+        id
+        type
+        species
+        pmids
+        comment
+        chemicalID
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+}
+subscription OnUpdateChemical {
+  onUpdateChemical {
+    id
+    cid
+    cas
+    iupac
+    inchikey
+    other_names
+    smiles
+    mw
+    createdAt
+    updatedAt
+    assays {
+      items {
+        id
+        type
+        species
+        pmids
+        comment
+        chemicalID
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+}
+subscription OnDeleteChemical {
+  onDeleteChemical {
+    id
+    cid
+    cas
+    iupac
+    inchikey
+    other_names
+    smiles
+    mw
+    createdAt
+    updatedAt
+    assays {
+      items {
+        id
+        type
+        species
+        pmids
+        comment
+        chemicalID
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+}
