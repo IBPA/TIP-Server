@@ -18,8 +18,6 @@ subscription OnCreateAssay {
     pmids
     comment
     chemicalID
-    createdAt
-    updatedAt
     chemical {
       id
       cid
@@ -29,12 +27,14 @@ subscription OnCreateAssay {
       other_names
       smiles
       mw
-      createdAt
-      updatedAt
       assays {
         nextToken
       }
+      createdAt
+      updatedAt
     }
+    createdAt
+    updatedAt
   }
 }
 subscription OnUpdateAssay {
@@ -56,8 +56,6 @@ subscription OnUpdateAssay {
     pmids
     comment
     chemicalID
-    createdAt
-    updatedAt
     chemical {
       id
       cid
@@ -67,12 +65,14 @@ subscription OnUpdateAssay {
       other_names
       smiles
       mw
-      createdAt
-      updatedAt
       assays {
         nextToken
       }
+      createdAt
+      updatedAt
     }
+    createdAt
+    updatedAt
   }
 }
 subscription OnDeleteAssay {
@@ -94,8 +94,6 @@ subscription OnDeleteAssay {
     pmids
     comment
     chemicalID
-    createdAt
-    updatedAt
     chemical {
       id
       cid
@@ -105,12 +103,14 @@ subscription OnDeleteAssay {
       other_names
       smiles
       mw
-      createdAt
-      updatedAt
       assays {
         nextToken
       }
+      createdAt
+      updatedAt
     }
+    createdAt
+    updatedAt
   }
 }
 subscription OnCreateChemical {
@@ -123,8 +123,6 @@ subscription OnCreateChemical {
     other_names
     smiles
     mw
-    createdAt
-    updatedAt
     assays {
       items {
         id
@@ -138,6 +136,8 @@ subscription OnCreateChemical {
       }
       nextToken
     }
+    createdAt
+    updatedAt
   }
 }
 subscription OnUpdateChemical {
@@ -150,8 +150,6 @@ subscription OnUpdateChemical {
     other_names
     smiles
     mw
-    createdAt
-    updatedAt
     assays {
       items {
         id
@@ -165,6 +163,8 @@ subscription OnUpdateChemical {
       }
       nextToken
     }
+    createdAt
+    updatedAt
   }
 }
 subscription OnDeleteChemical {
@@ -177,8 +177,6 @@ subscription OnDeleteChemical {
     other_names
     smiles
     mw
-    createdAt
-    updatedAt
     assays {
       items {
         id
@@ -192,5 +190,7 @@ subscription OnDeleteChemical {
       }
       nextToken
     }
+    createdAt
+    updatedAt
   }
 }

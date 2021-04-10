@@ -21,8 +21,6 @@ mutation CreateAssay(
     pmids
     comment
     chemicalID
-    createdAt
-    updatedAt
     chemical {
       id
       cid
@@ -32,12 +30,14 @@ mutation CreateAssay(
       other_names
       smiles
       mw
-      createdAt
-      updatedAt
       assays {
         nextToken
       }
+      createdAt
+      updatedAt
     }
+    createdAt
+    updatedAt
   }
 }
 mutation UpdateAssay(
@@ -62,8 +62,6 @@ mutation UpdateAssay(
     pmids
     comment
     chemicalID
-    createdAt
-    updatedAt
     chemical {
       id
       cid
@@ -73,12 +71,14 @@ mutation UpdateAssay(
       other_names
       smiles
       mw
-      createdAt
-      updatedAt
       assays {
         nextToken
       }
+      createdAt
+      updatedAt
     }
+    createdAt
+    updatedAt
   }
 }
 mutation DeleteAssay(
@@ -103,8 +103,6 @@ mutation DeleteAssay(
     pmids
     comment
     chemicalID
-    createdAt
-    updatedAt
     chemical {
       id
       cid
@@ -114,12 +112,14 @@ mutation DeleteAssay(
       other_names
       smiles
       mw
-      createdAt
-      updatedAt
       assays {
         nextToken
       }
+      createdAt
+      updatedAt
     }
+    createdAt
+    updatedAt
   }
 }
 mutation CreateChemical(
@@ -135,8 +135,6 @@ mutation CreateChemical(
     other_names
     smiles
     mw
-    createdAt
-    updatedAt
     assays {
       items {
         id
@@ -150,6 +148,8 @@ mutation CreateChemical(
       }
       nextToken
     }
+    createdAt
+    updatedAt
   }
 }
 mutation UpdateChemical(
@@ -165,8 +165,6 @@ mutation UpdateChemical(
     other_names
     smiles
     mw
-    createdAt
-    updatedAt
     assays {
       items {
         id
@@ -180,6 +178,8 @@ mutation UpdateChemical(
       }
       nextToken
     }
+    createdAt
+    updatedAt
   }
 }
 mutation DeleteChemical(
@@ -195,8 +195,6 @@ mutation DeleteChemical(
     other_names
     smiles
     mw
-    createdAt
-    updatedAt
     assays {
       items {
         id
@@ -210,5 +208,7 @@ mutation DeleteChemical(
       }
       nextToken
     }
+    createdAt
+    updatedAt
   }
 }

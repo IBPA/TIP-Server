@@ -138,9 +138,9 @@ export type Assay = {
   pmids?: Array<number | null> | null;
   comment?: string | null;
   chemicalID?: string;
+  chemical?: Chemical;
   createdAt?: string;
   updatedAt?: string;
-  chemical?: Chemical;
 };
 
 export type EnzymaticAssayData = {
@@ -168,9 +168,9 @@ export type Chemical = {
   other_names?: Array<string | null> | null;
   smiles?: string | null;
   mw?: number | null;
+  assays?: ModelAssayConnection;
   createdAt?: string;
   updatedAt?: string;
-  assays?: ModelAssayConnection;
 };
 
 export type ModelAssayConnection = {
@@ -298,8 +298,6 @@ export type CreateAssayMutation = {
   pmids?: Array<number | null> | null;
   comment?: string | null;
   chemicalID: string;
-  createdAt: string;
-  updatedAt: string;
   chemical?: {
     __typename: "Chemical";
     id: string;
@@ -310,13 +308,15 @@ export type CreateAssayMutation = {
     other_names?: Array<string | null> | null;
     smiles?: string | null;
     mw?: number | null;
-    createdAt: string;
-    updatedAt: string;
     assays?: {
       __typename: "ModelAssayConnection";
       nextToken?: string | null;
     } | null;
+    createdAt: string;
+    updatedAt: string;
   } | null;
+  createdAt: string;
+  updatedAt: string;
 };
 
 export type UpdateAssayMutation = {
@@ -340,8 +340,6 @@ export type UpdateAssayMutation = {
   pmids?: Array<number | null> | null;
   comment?: string | null;
   chemicalID: string;
-  createdAt: string;
-  updatedAt: string;
   chemical?: {
     __typename: "Chemical";
     id: string;
@@ -352,13 +350,15 @@ export type UpdateAssayMutation = {
     other_names?: Array<string | null> | null;
     smiles?: string | null;
     mw?: number | null;
-    createdAt: string;
-    updatedAt: string;
     assays?: {
       __typename: "ModelAssayConnection";
       nextToken?: string | null;
     } | null;
+    createdAt: string;
+    updatedAt: string;
   } | null;
+  createdAt: string;
+  updatedAt: string;
 };
 
 export type DeleteAssayMutation = {
@@ -382,8 +382,6 @@ export type DeleteAssayMutation = {
   pmids?: Array<number | null> | null;
   comment?: string | null;
   chemicalID: string;
-  createdAt: string;
-  updatedAt: string;
   chemical?: {
     __typename: "Chemical";
     id: string;
@@ -394,13 +392,15 @@ export type DeleteAssayMutation = {
     other_names?: Array<string | null> | null;
     smiles?: string | null;
     mw?: number | null;
-    createdAt: string;
-    updatedAt: string;
     assays?: {
       __typename: "ModelAssayConnection";
       nextToken?: string | null;
     } | null;
+    createdAt: string;
+    updatedAt: string;
   } | null;
+  createdAt: string;
+  updatedAt: string;
 };
 
 export type CreateChemicalMutation = {
@@ -413,8 +413,6 @@ export type CreateChemicalMutation = {
   other_names?: Array<string | null> | null;
   smiles?: string | null;
   mw?: number | null;
-  createdAt: string;
-  updatedAt: string;
   assays?: {
     __typename: "ModelAssayConnection";
     items?: Array<{
@@ -430,6 +428,8 @@ export type CreateChemicalMutation = {
     } | null> | null;
     nextToken?: string | null;
   } | null;
+  createdAt: string;
+  updatedAt: string;
 };
 
 export type UpdateChemicalMutation = {
@@ -442,8 +442,6 @@ export type UpdateChemicalMutation = {
   other_names?: Array<string | null> | null;
   smiles?: string | null;
   mw?: number | null;
-  createdAt: string;
-  updatedAt: string;
   assays?: {
     __typename: "ModelAssayConnection";
     items?: Array<{
@@ -459,6 +457,8 @@ export type UpdateChemicalMutation = {
     } | null> | null;
     nextToken?: string | null;
   } | null;
+  createdAt: string;
+  updatedAt: string;
 };
 
 export type DeleteChemicalMutation = {
@@ -471,8 +471,6 @@ export type DeleteChemicalMutation = {
   other_names?: Array<string | null> | null;
   smiles?: string | null;
   mw?: number | null;
-  createdAt: string;
-  updatedAt: string;
   assays?: {
     __typename: "ModelAssayConnection";
     items?: Array<{
@@ -488,6 +486,8 @@ export type DeleteChemicalMutation = {
     } | null> | null;
     nextToken?: string | null;
   } | null;
+  createdAt: string;
+  updatedAt: string;
 };
 
 export type GetAssayQuery = {
@@ -511,8 +511,6 @@ export type GetAssayQuery = {
   pmids?: Array<number | null> | null;
   comment?: string | null;
   chemicalID: string;
-  createdAt: string;
-  updatedAt: string;
   chemical?: {
     __typename: "Chemical";
     id: string;
@@ -523,13 +521,15 @@ export type GetAssayQuery = {
     other_names?: Array<string | null> | null;
     smiles?: string | null;
     mw?: number | null;
-    createdAt: string;
-    updatedAt: string;
     assays?: {
       __typename: "ModelAssayConnection";
       nextToken?: string | null;
     } | null;
+    createdAt: string;
+    updatedAt: string;
   } | null;
+  createdAt: string;
+  updatedAt: string;
 };
 
 export type ListAssaysQuery = {
@@ -555,8 +555,6 @@ export type ListAssaysQuery = {
     pmids?: Array<number | null> | null;
     comment?: string | null;
     chemicalID: string;
-    createdAt: string;
-    updatedAt: string;
     chemical?: {
       __typename: "Chemical";
       id: string;
@@ -570,28 +568,8 @@ export type ListAssaysQuery = {
       createdAt: string;
       updatedAt: string;
     } | null;
-  } | null> | null;
-  nextToken?: string | null;
-};
-
-export type ListChemicalsQuery = {
-  __typename: "ModelChemicalConnection";
-  items?: Array<{
-    __typename: "Chemical";
-    id: string;
-    cid?: number | null;
-    cas?: string | null;
-    iupac?: string | null;
-    inchikey?: string | null;
-    other_names?: Array<string | null> | null;
-    smiles?: string | null;
-    mw?: number | null;
     createdAt: string;
     updatedAt: string;
-    assays?: {
-      __typename: "ModelAssayConnection";
-      nextToken?: string | null;
-    } | null;
   } | null> | null;
   nextToken?: string | null;
 };
@@ -606,8 +584,6 @@ export type GetChemicalQuery = {
   other_names?: Array<string | null> | null;
   smiles?: string | null;
   mw?: number | null;
-  createdAt: string;
-  updatedAt: string;
   assays?: {
     __typename: "ModelAssayConnection";
     items?: Array<{
@@ -623,6 +599,30 @@ export type GetChemicalQuery = {
     } | null> | null;
     nextToken?: string | null;
   } | null;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type ListChemicalsQuery = {
+  __typename: "ModelChemicalConnection";
+  items?: Array<{
+    __typename: "Chemical";
+    id: string;
+    cid?: number | null;
+    cas?: string | null;
+    iupac?: string | null;
+    inchikey?: string | null;
+    other_names?: Array<string | null> | null;
+    smiles?: string | null;
+    mw?: number | null;
+    assays?: {
+      __typename: "ModelAssayConnection";
+      nextToken?: string | null;
+    } | null;
+    createdAt: string;
+    updatedAt: string;
+  } | null> | null;
+  nextToken?: string | null;
 };
 
 export type OnCreateAssaySubscription = {
@@ -646,8 +646,6 @@ export type OnCreateAssaySubscription = {
   pmids?: Array<number | null> | null;
   comment?: string | null;
   chemicalID: string;
-  createdAt: string;
-  updatedAt: string;
   chemical?: {
     __typename: "Chemical";
     id: string;
@@ -658,13 +656,15 @@ export type OnCreateAssaySubscription = {
     other_names?: Array<string | null> | null;
     smiles?: string | null;
     mw?: number | null;
-    createdAt: string;
-    updatedAt: string;
     assays?: {
       __typename: "ModelAssayConnection";
       nextToken?: string | null;
     } | null;
+    createdAt: string;
+    updatedAt: string;
   } | null;
+  createdAt: string;
+  updatedAt: string;
 };
 
 export type OnUpdateAssaySubscription = {
@@ -688,8 +688,6 @@ export type OnUpdateAssaySubscription = {
   pmids?: Array<number | null> | null;
   comment?: string | null;
   chemicalID: string;
-  createdAt: string;
-  updatedAt: string;
   chemical?: {
     __typename: "Chemical";
     id: string;
@@ -700,13 +698,15 @@ export type OnUpdateAssaySubscription = {
     other_names?: Array<string | null> | null;
     smiles?: string | null;
     mw?: number | null;
-    createdAt: string;
-    updatedAt: string;
     assays?: {
       __typename: "ModelAssayConnection";
       nextToken?: string | null;
     } | null;
+    createdAt: string;
+    updatedAt: string;
   } | null;
+  createdAt: string;
+  updatedAt: string;
 };
 
 export type OnDeleteAssaySubscription = {
@@ -730,8 +730,6 @@ export type OnDeleteAssaySubscription = {
   pmids?: Array<number | null> | null;
   comment?: string | null;
   chemicalID: string;
-  createdAt: string;
-  updatedAt: string;
   chemical?: {
     __typename: "Chemical";
     id: string;
@@ -742,13 +740,15 @@ export type OnDeleteAssaySubscription = {
     other_names?: Array<string | null> | null;
     smiles?: string | null;
     mw?: number | null;
-    createdAt: string;
-    updatedAt: string;
     assays?: {
       __typename: "ModelAssayConnection";
       nextToken?: string | null;
     } | null;
+    createdAt: string;
+    updatedAt: string;
   } | null;
+  createdAt: string;
+  updatedAt: string;
 };
 
 export type OnCreateChemicalSubscription = {
@@ -761,8 +761,6 @@ export type OnCreateChemicalSubscription = {
   other_names?: Array<string | null> | null;
   smiles?: string | null;
   mw?: number | null;
-  createdAt: string;
-  updatedAt: string;
   assays?: {
     __typename: "ModelAssayConnection";
     items?: Array<{
@@ -778,6 +776,8 @@ export type OnCreateChemicalSubscription = {
     } | null> | null;
     nextToken?: string | null;
   } | null;
+  createdAt: string;
+  updatedAt: string;
 };
 
 export type OnUpdateChemicalSubscription = {
@@ -790,8 +790,6 @@ export type OnUpdateChemicalSubscription = {
   other_names?: Array<string | null> | null;
   smiles?: string | null;
   mw?: number | null;
-  createdAt: string;
-  updatedAt: string;
   assays?: {
     __typename: "ModelAssayConnection";
     items?: Array<{
@@ -807,6 +805,8 @@ export type OnUpdateChemicalSubscription = {
     } | null> | null;
     nextToken?: string | null;
   } | null;
+  createdAt: string;
+  updatedAt: string;
 };
 
 export type OnDeleteChemicalSubscription = {
@@ -819,8 +819,6 @@ export type OnDeleteChemicalSubscription = {
   other_names?: Array<string | null> | null;
   smiles?: string | null;
   mw?: number | null;
-  createdAt: string;
-  updatedAt: string;
   assays?: {
     __typename: "ModelAssayConnection";
     items?: Array<{
@@ -836,6 +834,8 @@ export type OnDeleteChemicalSubscription = {
     } | null> | null;
     nextToken?: string | null;
   } | null;
+  createdAt: string;
+  updatedAt: string;
 };
 
 @Injectable({
@@ -868,8 +868,6 @@ export class APIService {
           pmids
           comment
           chemicalID
-          createdAt
-          updatedAt
           chemical {
             __typename
             id
@@ -880,13 +878,15 @@ export class APIService {
             other_names
             smiles
             mw
-            createdAt
-            updatedAt
             assays {
               __typename
               nextToken
             }
+            createdAt
+            updatedAt
           }
+          createdAt
+          updatedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -926,8 +926,6 @@ export class APIService {
           pmids
           comment
           chemicalID
-          createdAt
-          updatedAt
           chemical {
             __typename
             id
@@ -938,13 +936,15 @@ export class APIService {
             other_names
             smiles
             mw
-            createdAt
-            updatedAt
             assays {
               __typename
               nextToken
             }
+            createdAt
+            updatedAt
           }
+          createdAt
+          updatedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -984,8 +984,6 @@ export class APIService {
           pmids
           comment
           chemicalID
-          createdAt
-          updatedAt
           chemical {
             __typename
             id
@@ -996,13 +994,15 @@ export class APIService {
             other_names
             smiles
             mw
-            createdAt
-            updatedAt
             assays {
               __typename
               nextToken
             }
+            createdAt
+            updatedAt
           }
+          createdAt
+          updatedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -1031,8 +1031,6 @@ export class APIService {
           other_names
           smiles
           mw
-          createdAt
-          updatedAt
           assays {
             __typename
             items {
@@ -1048,6 +1046,8 @@ export class APIService {
             }
             nextToken
           }
+          createdAt
+          updatedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -1076,8 +1076,6 @@ export class APIService {
           other_names
           smiles
           mw
-          createdAt
-          updatedAt
           assays {
             __typename
             items {
@@ -1093,6 +1091,8 @@ export class APIService {
             }
             nextToken
           }
+          createdAt
+          updatedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -1121,8 +1121,6 @@ export class APIService {
           other_names
           smiles
           mw
-          createdAt
-          updatedAt
           assays {
             __typename
             items {
@@ -1138,6 +1136,8 @@ export class APIService {
             }
             nextToken
           }
+          createdAt
+          updatedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -1174,8 +1174,6 @@ export class APIService {
           pmids
           comment
           chemicalID
-          createdAt
-          updatedAt
           chemical {
             __typename
             id
@@ -1186,13 +1184,15 @@ export class APIService {
             other_names
             smiles
             mw
-            createdAt
-            updatedAt
             assays {
               __typename
               nextToken
             }
+            createdAt
+            updatedAt
           }
+          createdAt
+          updatedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -1232,8 +1232,6 @@ export class APIService {
             pmids
             comment
             chemicalID
-            createdAt
-            updatedAt
             chemical {
               __typename
               id
@@ -1247,6 +1245,8 @@ export class APIService {
               createdAt
               updatedAt
             }
+            createdAt
+            updatedAt
           }
           nextToken
         }
@@ -1266,6 +1266,45 @@ export class APIService {
     )) as any;
     return <ListAssaysQuery>response.data.listAssays;
   }
+  async GetChemical(id: string): Promise<GetChemicalQuery> {
+    const statement = `query GetChemical($id: ID!) {
+        getChemical(id: $id) {
+          __typename
+          id
+          cid
+          cas
+          iupac
+          inchikey
+          other_names
+          smiles
+          mw
+          assays {
+            __typename
+            items {
+              __typename
+              id
+              type
+              species
+              pmids
+              comment
+              chemicalID
+              createdAt
+              updatedAt
+            }
+            nextToken
+          }
+          createdAt
+          updatedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      id
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <GetChemicalQuery>response.data.getChemical;
+  }
   async ListChemicals(
     filter?: ModelChemicalFilterInput,
     limit?: number,
@@ -1284,12 +1323,12 @@ export class APIService {
             other_names
             smiles
             mw
-            createdAt
-            updatedAt
             assays {
               __typename
               nextToken
             }
+            createdAt
+            updatedAt
           }
           nextToken
         }
@@ -1308,45 +1347,6 @@ export class APIService {
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <ListChemicalsQuery>response.data.listChemicals;
-  }
-  async GetChemical(id: string): Promise<GetChemicalQuery> {
-    const statement = `query GetChemical($id: ID!) {
-        getChemical(id: $id) {
-          __typename
-          id
-          cid
-          cas
-          iupac
-          inchikey
-          other_names
-          smiles
-          mw
-          createdAt
-          updatedAt
-          assays {
-            __typename
-            items {
-              __typename
-              id
-              type
-              species
-              pmids
-              comment
-              chemicalID
-              createdAt
-              updatedAt
-            }
-            nextToken
-          }
-        }
-      }`;
-    const gqlAPIServiceArguments: any = {
-      id
-    };
-    const response = (await API.graphql(
-      graphqlOperation(statement, gqlAPIServiceArguments)
-    )) as any;
-    return <GetChemicalQuery>response.data.getChemical;
   }
   OnCreateAssayListener: Observable<
     SubscriptionResponse<OnCreateAssaySubscription>
@@ -1374,8 +1374,6 @@ export class APIService {
           pmids
           comment
           chemicalID
-          createdAt
-          updatedAt
           chemical {
             __typename
             id
@@ -1386,13 +1384,15 @@ export class APIService {
             other_names
             smiles
             mw
-            createdAt
-            updatedAt
             assays {
               __typename
               nextToken
             }
+            createdAt
+            updatedAt
           }
+          createdAt
+          updatedAt
         }
       }`
     )
@@ -1424,8 +1424,6 @@ export class APIService {
           pmids
           comment
           chemicalID
-          createdAt
-          updatedAt
           chemical {
             __typename
             id
@@ -1436,13 +1434,15 @@ export class APIService {
             other_names
             smiles
             mw
-            createdAt
-            updatedAt
             assays {
               __typename
               nextToken
             }
+            createdAt
+            updatedAt
           }
+          createdAt
+          updatedAt
         }
       }`
     )
@@ -1474,8 +1474,6 @@ export class APIService {
           pmids
           comment
           chemicalID
-          createdAt
-          updatedAt
           chemical {
             __typename
             id
@@ -1486,13 +1484,15 @@ export class APIService {
             other_names
             smiles
             mw
-            createdAt
-            updatedAt
             assays {
               __typename
               nextToken
             }
+            createdAt
+            updatedAt
           }
+          createdAt
+          updatedAt
         }
       }`
     )
@@ -1513,8 +1513,6 @@ export class APIService {
           other_names
           smiles
           mw
-          createdAt
-          updatedAt
           assays {
             __typename
             items {
@@ -1530,6 +1528,8 @@ export class APIService {
             }
             nextToken
           }
+          createdAt
+          updatedAt
         }
       }`
     )
@@ -1550,8 +1550,6 @@ export class APIService {
           other_names
           smiles
           mw
-          createdAt
-          updatedAt
           assays {
             __typename
             items {
@@ -1567,6 +1565,8 @@ export class APIService {
             }
             nextToken
           }
+          createdAt
+          updatedAt
         }
       }`
     )
@@ -1587,8 +1587,6 @@ export class APIService {
           other_names
           smiles
           mw
-          createdAt
-          updatedAt
           assays {
             __typename
             items {
@@ -1604,6 +1602,8 @@ export class APIService {
             }
             nextToken
           }
+          createdAt
+          updatedAt
         }
       }`
     )
