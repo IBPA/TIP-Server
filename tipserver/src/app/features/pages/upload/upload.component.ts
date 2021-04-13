@@ -2,17 +2,11 @@
   TODO:
     1. choose file button covers a long range.
  */
-import { Component, OnInit } from '@angular/core';
-
-import * as csv from 'csvtojson';
-// import { catchError } from 'rxjs/operators';
-
-import { ChangeDetectorRef } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 // import { MatDialog } from '@angular/material/dialog';
-// import { DialogComponent } from './dialog/dialog.component';
-
 import { APIService } from '@app/core/services/API.service';
+// import { DialogComponent } from './dialog/dialog.component';
 
 enum DataMode {
   Enzyme,
@@ -25,17 +19,17 @@ enum DataMode {
   styleUrls: ['./upload.component.css']
 })
 export class UploadComponent implements OnInit {
-
-  public formGroup: any;
-
-  // public dataMode = DataMode.Enzyme;
+  formGroup!: FormGroup;
+  // dataMode = DataMode.Enzyme;
   // finished = false;
   // message = "";
 
-  constructor(private fb: FormBuilder, private cd: ChangeDetectorRef,
-              private service: APIService,
-              // private dialog: MatDialog
-              ) { }
+  constructor(
+    private fb: FormBuilder,
+    private ref: ChangeDetectorRef,
+    private service: APIService,
+    // private dialog: MatDialog
+  ) { }
 
   ngOnInit(): void {
     this.formGroup = this.fb.group({
@@ -46,14 +40,14 @@ export class UploadComponent implements OnInit {
   onFileChange(event: any) {
     let reader = new FileReader();
 
-    if(event.target.files && event.target.files.length) {
+    if (event.target.files && event.target.files.length) {
       const [file] = event.target.files;
       reader.readAsText(file);
       reader.onload = () => {
         this.formGroup.patchValue({
           file: reader.result
         });
-        this.cd.markForCheck();
+        this.ref.markForCheck();
       };
     }
   }
