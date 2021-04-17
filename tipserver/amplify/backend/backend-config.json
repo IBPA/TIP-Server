@@ -16,5 +16,12 @@
         }
       }
     }
+  },
+  "function": {
+    "GraphQLResolver": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
   }
 }

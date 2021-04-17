@@ -10,6 +10,14 @@
       "StackName": "amplify-tipserver-dev-164427",
       "StackId": "arn:aws:cloudformation:us-west-2:105315678677:stack/amplify-tipserver-dev-164427/875ba220-998d-11eb-b44a-06d5e2b637e3",
       "AmplifyAppId": "d3k854yawandhi"
+    },
+    "categories": {
+      "function": {
+        "GraphQLResolver": {
+          "deploymentBucketName": "amplify-tipserver-dev-164427-deployment",
+          "s3Key": "amplify-builds/GraphQLResolver-577a42514f4864304e51-build.zip"
+        }
+      }
     }
   }
 }

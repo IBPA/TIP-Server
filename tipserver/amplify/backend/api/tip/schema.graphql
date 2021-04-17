@@ -1,24 +1,3 @@
-# type Blog @model @auth(rules: [{allow: public}]) {
-#   id: ID!
-#   name: String!
-#   posts: [Post] @connection(keyName: "byBlog", fields: ["id"])
-# }
-
-# type Post @model @key(name: "byBlog", fields: ["blogID"]) @auth(rules: [{allow: public}]) {
-#   id: ID!
-#   title: String!
-#   blogID: ID!
-#   blog: Blog @connection(fields: ["blogID"])
-#   comments: [Comment] @connection(keyName: "byPost", fields: ["id"])
-# }
-
-# type Comment @model @key(name: "byPost", fields: ["postID", "content"]) @auth(rules: [{allow: public}]) {
-#   id: ID!
-#   postID: ID!
-#   post: Post @connection(fields: ["postID"])
-#   content: String!
-# }
-
 enum AhrType {
   DB  # DNA binding
   GE  # Gene expression
@@ -69,4 +48,15 @@ type Chemical @model
   smiles: String
   mw: Float
   assays: [Assay] @connection(keyName: "byChemical", fields: ["id"])
+}
+
+type Mutation {
+  CreateChemical(chemical: Chemical!): Response
+    @function(name: "GraphQLResolver-${env}")
+}
+
+type Response {
+  id: ID!
+  status: Int!
+  message: String
 }
