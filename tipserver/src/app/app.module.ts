@@ -1,15 +1,14 @@
 import { NgModule } from '@angular/core';
-import { AppComponent } from './app.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { RouterModule, Routes } from '@angular/router';
 import { AmplifyUIAngularModule } from '@aws-amplify/ui-angular';
 
-import { RouterModule, Routes } from '@angular/router';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import { AppComponent } from './app.component';
+import { HeaderComponent } from './features/header/header.component';
 import { HomeComponent } from './features/pages/home/home.component';
 import { SearchComponent } from './features/pages/search/search.component';
 import { UploadComponent } from './features/pages/upload/upload.component';
-import { HeaderComponent } from './features/header/header.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },

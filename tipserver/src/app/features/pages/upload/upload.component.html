@@ -23,11 +23,9 @@
   </div>
   <br />
   <div class="pageDiv pageUpdateDiv">
-    <form [formGroup]="formGroup" novalidate (ngSubmit)="onSubmit()"
-          id="formUpload">
+    <form [formGroup]="formGroup" novalidate (ngSubmit)="onSubmit()" id="formUpload">
       <input type="file" (change)="onFileChange($event)" />
-      <button class="btn btn-outline-primary" type="submit"
-              [disabled]="formGroup.invalid || formGroup.prestine">
+      <button class="btn btn-outline-primary" type="submit" [disabled]="formGroup.invalid || formGroup.pristine">
         Upload
       </button>
     </form>
