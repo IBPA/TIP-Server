@@ -18,6 +18,11 @@ query GetAssay($id: ID!) {
     pmids
     comment
     chemicalID
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
     chemical {
       id
       cid
@@ -27,14 +32,16 @@ query GetAssay($id: ID!) {
       other_names
       smiles
       mw
-      assays {
-        nextToken
-      }
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
+      assays {
+        nextToken
+        startedAt
+      }
     }
-    createdAt
-    updatedAt
   }
 }
 query ListAssays(
@@ -61,6 +68,11 @@ query ListAssays(
       pmids
       comment
       chemicalID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
       chemical {
         id
         cid
@@ -70,40 +82,70 @@ query ListAssays(
         other_names
         smiles
         mw
+        _version
+        _deleted
+        _lastChangedAt
         createdAt
         updatedAt
       }
-      createdAt
-      updatedAt
     }
     nextToken
+    startedAt
   }
 }
-query GetChemical($id: ID!) {
-  getChemical(id: $id) {
-    id
-    cid
-    cas
-    iupac
-    inchikey
-    other_names
-    smiles
-    mw
-    assays {
-      items {
+query SyncAssays(
+  $filter: ModelAssayFilterInput
+  $limit: Int
+  $nextToken: String
+  $lastSync: AWSTimestamp
+) {
+  syncAssays(
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+    lastSync: $lastSync
+  ) {
+    items {
+      id
+      type
+      enzymeData {
+        protein
+        gene
+        concentrationSubstrate
+        concentrationTested
+        inhibition
+        ec50
+      }
+      ahrData {
+        ahrType
+      }
+      species
+      pmids
+      comment
+      chemicalID
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      chemical {
         id
-        type
-        species
-        pmids
-        comment
-        chemicalID
+        cid
+        cas
+        iupac
+        inchikey
+        other_names
+        smiles
+        mw
+        _version
+        _deleted
+        _lastChangedAt
         createdAt
         updatedAt
       }
-      nextToken
     }
-    createdAt
-    updatedAt
+    nextToken
+    startedAt
   }
 }
 query ListChemicals(
@@ -121,12 +163,86 @@ query ListChemicals(
       other_names
       smiles
       mw
-      assays {
-        nextToken
-      }
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
+      assays {
+        nextToken
+        startedAt
+      }
     }
     nextToken
+    startedAt
+  }
+}
+query GetChemical($id: ID!) {
+  getChemical(id: $id) {
+    id
+    cid
+    cas
+    iupac
+    inchikey
+    other_names
+    smiles
+    mw
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+    assays {
+      items {
+        id
+        type
+        species
+        pmids
+        comment
+        chemicalID
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+      }
+      nextToken
+      startedAt
+    }
+  }
+}
+query SyncChemicals(
+  $filter: ModelChemicalFilterInput
+  $limit: Int
+  $nextToken: String
+  $lastSync: AWSTimestamp
+) {
+  syncChemicals(
+    filter: $filter
+    limit: $limit
+    nextToken: $nextToken
+    lastSync: $lastSync
+  ) {
+    items {
+      id
+      cid
+      cas
+      iupac
+      inchikey
+      other_names
+      smiles
+      mw
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      assays {
+        nextToken
+        startedAt
+      }
+    }
+    nextToken
+    startedAt
   }
 }

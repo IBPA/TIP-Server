@@ -64,8 +64,8 @@ export class UploadComponent implements OnInit {
       other_names: ['Fake chemical']
     });
     this.service.ListChemicals()
-      .then(e => {
-        console.log(e);
+      .then(event => {
+        console.log(event);
       });
     // csv()
     //   .fromString(this.formGroup.value.file)
