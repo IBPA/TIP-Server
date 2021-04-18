@@ -50,13 +50,13 @@ type Chemical @model
   assays: [Assay] @connection(keyName: "byChemical", fields: ["id"])
 }
 
-type Mutation {
-  CreateChemical(chemical: Chemical!): Response
-    @function(name: "GraphQLResolver-${env}")
-}
+# type Mutation {
+#   CreateChemical(chemical: Chemical!): Response
+#     @function(name: "GraphQLResolver-${env}")
+# }
 
-type Response {
-  id: ID!
-  status: Int!
-  message: String
-}
+# type Response {
+#   id: ID!
+#   status: Int!
+#   message: String
+# }
