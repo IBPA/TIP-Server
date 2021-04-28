@@ -18,11 +18,6 @@ subscription OnCreateAssay {
     pmids
     comment
     chemicalID
-    _version
-    _deleted
-    _lastChangedAt
-    createdAt
-    updatedAt
     chemical {
       id
       cid
@@ -32,16 +27,14 @@ subscription OnCreateAssay {
       other_names
       smiles
       mw
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
       assays {
         nextToken
-        startedAt
       }
+      createdAt
+      updatedAt
     }
+    createdAt
+    updatedAt
   }
 }
 subscription OnUpdateAssay {
@@ -63,11 +56,6 @@ subscription OnUpdateAssay {
     pmids
     comment
     chemicalID
-    _version
-    _deleted
-    _lastChangedAt
-    createdAt
-    updatedAt
     chemical {
       id
       cid
@@ -77,16 +65,14 @@ subscription OnUpdateAssay {
       other_names
       smiles
       mw
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
       assays {
         nextToken
-        startedAt
       }
+      createdAt
+      updatedAt
     }
+    createdAt
+    updatedAt
   }
 }
 subscription OnDeleteAssay {
@@ -108,11 +94,6 @@ subscription OnDeleteAssay {
     pmids
     comment
     chemicalID
-    _version
-    _deleted
-    _lastChangedAt
-    createdAt
-    updatedAt
     chemical {
       id
       cid
@@ -122,16 +103,14 @@ subscription OnDeleteAssay {
       other_names
       smiles
       mw
-      _version
-      _deleted
-      _lastChangedAt
-      createdAt
-      updatedAt
       assays {
         nextToken
-        startedAt
       }
+      createdAt
+      updatedAt
     }
+    createdAt
+    updatedAt
   }
 }
 subscription OnCreateChemical {
@@ -144,11 +123,6 @@ subscription OnCreateChemical {
     other_names
     smiles
     mw
-    _version
-    _deleted
-    _lastChangedAt
-    createdAt
-    updatedAt
     assays {
       items {
         id
@@ -157,15 +131,13 @@ subscription OnCreateChemical {
         pmids
         comment
         chemicalID
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
       nextToken
-      startedAt
     }
+    createdAt
+    updatedAt
   }
 }
 subscription OnUpdateChemical {
@@ -178,11 +150,6 @@ subscription OnUpdateChemical {
     other_names
     smiles
     mw
-    _version
-    _deleted
-    _lastChangedAt
-    createdAt
-    updatedAt
     assays {
       items {
         id
@@ -191,15 +158,13 @@ subscription OnUpdateChemical {
         pmids
         comment
         chemicalID
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
       nextToken
-      startedAt
     }
+    createdAt
+    updatedAt
   }
 }
 subscription OnDeleteChemical {
@@ -212,11 +177,6 @@ subscription OnDeleteChemical {
     other_names
     smiles
     mw
-    _version
-    _deleted
-    _lastChangedAt
-    createdAt
-    updatedAt
     assays {
       items {
         id
@@ -225,14 +185,12 @@ subscription OnDeleteChemical {
         pmids
         comment
         chemicalID
-        _version
-        _deleted
-        _lastChangedAt
         createdAt
         updatedAt
       }
       nextToken
-      startedAt
     }
+    createdAt
+    updatedAt
   }
 }
