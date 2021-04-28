@@ -43,8 +43,8 @@ type Chemical @model
   cid: Int
   cas: String
   iupac: String
-  inchikey: String
-  other_names: [String]
+  inchiKey: String
+  otherNames: [String]
   smiles: String
   mw: Float
   assays: [Assay] @connection(keyName: "byChemical", fields: ["id"])
