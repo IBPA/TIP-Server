@@ -8,11 +8,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { APIService } from '@app/core/services/API.service';
 // import { DialogComponent } from './dialog/dialog.component';
 
-enum DataMode {
-  Enzyme,
-  AhR
-}
-
 @Component({
   selector: 'upload',
   templateUrl: './upload.component.html',
@@ -20,7 +15,7 @@ enum DataMode {
 })
 export class UploadComponent implements OnInit {
   formGroup!: FormGroup;
-  // dataMode = DataMode.Enzyme;
+  uploadDataType = "AhR";
   // finished = false;
   // message = "";
 
@@ -33,7 +28,7 @@ export class UploadComponent implements OnInit {
 
   ngOnInit(): void {
     this.formGroup = this.fb.group({
-      file: [null, Validators.required]
+      file: null
     });
   }
 
@@ -47,18 +42,21 @@ export class UploadComponent implements OnInit {
         this.formGroup.patchValue({
           file: reader.result
         });
+        this.formGroup.markAsDirty();
         this.ref.markForCheck();
       };
+    } else {
+      this.formGroup.markAsPristine();
     }
   }
 
-  onSubmit() {
-    this.service.CreateChemical({
-      cid: 123,
-      other_names: ['Fake chemical']
-    });
+  async onSubmit() {
     this.service.ListChemicals()
       .then(event => {
+        console.log(event['items']);
+        event['items']!.forEach(async item => {
+          await this.service.DeleteChemical({id: item!['id']});
+        });
         console.log(event);
       });
     // csv()
