@@ -1,14 +1,14 @@
-enum AhrType {
-  DB  # DNA binding
-  GE  # Gene expression
-  LB  # Ligand binding
-  NT  # Nuclear translocation
-}
+# enum AhrType {
+#   DB  # DNA binding
+#   GE  # Gene expression
+#   LB  # Ligand binding
+#   NT  # Nuclear translocation
+# }
 
-enum AssayType {
-  ENZYME
-  AHR
-}
+# enum AssayType {
+#   ENZYME
+#   AHR
+# }
 
 type EnzymaticAssayData {
   protein: String
@@ -20,14 +20,14 @@ type EnzymaticAssayData {
 }
 
 type AhrAssayData {
-  ahrType: AhrType!
+  ahrType: String!
 }
 
 type Assay @model
   @auth(rules: [{ allow: public }])
   @key(name: "byChemical", fields: ["chemicalID"]) {
   id: ID!
-  type: AssayType!
+  type: String!
   enzymeData: EnzymaticAssayData
   ahrData: AhrAssayData
   species: String
@@ -50,13 +50,34 @@ type Chemical @model
   assays: [Assay] @connection(keyName: "byChemical", fields: ["id"])
 }
 
-# type Mutation {
-#   CreateChemical(chemical: Chemical!): Response
-#     @function(name: "GraphQLResolver-${env}")
-# }
+type Query {
+  validateAssay(
+    type: String!
 
-# type Response {
-#   id: ID!
-#   status: Int!
-#   message: String
-# }
+    protein: String  # EnzymaticAssayDataFields
+    gene: String
+    concentrationSubstrate: Float
+    concentrationTested: Float
+    inhibition: Float
+    ec50: String
+
+    ahrType: String  # AhrAssayDataFields
+
+    species: String
+    pmids: [Int]
+    comment: String): Response! @function(name: "GraphQLResolver-${env}")
+
+  validateChemical(
+    cid: Int,
+    cas: String,
+    iupac: String,
+    inchiKey: String,
+    otherNames: [String],
+    smiles: String,
+    mw: Float): Response! @function(name: "GraphQLResolver-${env}")
+}
+
+type Response {
+  status: Int!
+  message: String
+}

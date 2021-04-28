@@ -19,6 +19,10 @@
         "tipserverb8bceb9fDefineAuthChallenge": {
           "deploymentBucketName": "amplify-tipserver-devtwo-11156-deployment",
           "s3Key": "amplify-builds/tipserverb8bceb9fDefineAuthChallenge-4a3946434c7647726846-build.zip"
+        },
+        "GraphQLResolver": {
+          "deploymentBucketName": "amplify-tipserver-devtwo-11156-deployment",
+          "s3Key": "amplify-builds/GraphQLResolver-597653534d5a6d4d707a-build.zip"
         }
       }
     }
