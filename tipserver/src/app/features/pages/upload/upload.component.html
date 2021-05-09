@@ -24,6 +24,10 @@
   <br />
   <div class="pageDiv pageUpdateDiv">
     <form [formGroup]="formGroup" novalidate (ngSubmit)="onSubmit()" id="formUpload">
+      <select [(ngModel)]="uploadDataType" [ngModelOptions]="{standalone: true}">
+        <option>AhR</option>
+        <option>Enzyme</option>
+      </select>
       <input type="file" (change)="onFileChange($event)" />
       <button class="btn btn-outline-primary" type="submit" [disabled]="formGroup.invalid || formGroup.pristine">
         Upload

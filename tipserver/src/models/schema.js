@@ -1,7 +1,7 @@
 export const schema = {
     "models": {
-        "Blog": {
-            "name": "Blog",
+        "Assay": {
+            "name": "Assay",
             "fields": {
                 "id": {
                     "name": "id",
@@ -10,111 +10,84 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "name": {
-                    "name": "name",
+                "type": {
+                    "name": "type",
                     "isArray": false,
                     "type": "String",
                     "isRequired": true,
                     "attributes": []
                 },
-                "posts": {
-                    "name": "posts",
-                    "isArray": true,
+                "enzymeData": {
+                    "name": "enzymeData",
+                    "isArray": false,
                     "type": {
-                        "model": "Post"
+                        "nonModel": "EnzymaticAssayData"
                     },
                     "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true,
-                    "association": {
-                        "connectionType": "HAS_MANY",
-                        "associatedWith": "blog"
-                    }
-                }
-            },
-            "syncable": true,
-            "pluralName": "Blogs",
-            "attributes": [
-                {
-                    "type": "model",
-                    "properties": {}
-                },
-                {
-                    "type": "auth",
-                    "properties": {
-                        "rules": [
-                            {
-                                "allow": "public",
-                                "operations": [
-                                    "create",
-                                    "update",
-                                    "delete",
-                                    "read"
-                                ]
-                            }
-                        ]
-                    }
-                }
-            ]
-        },
-        "Post": {
-            "name": "Post",
-            "fields": {
-                "id": {
-                    "name": "id",
-                    "isArray": false,
-                    "type": "ID",
-                    "isRequired": true,
                     "attributes": []
                 },
-                "title": {
-                    "name": "title",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": true,
-                    "attributes": []
-                },
-                "blog": {
-                    "name": "blog",
+                "ahrData": {
+                    "name": "ahrData",
                     "isArray": false,
                     "type": {
-                        "model": "Blog"
+                        "nonModel": "AhrAssayData"
+                    },
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "species": {
+                    "name": "species",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "pmids": {
+                    "name": "pmids",
+                    "isArray": true,
+                    "type": "Int",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true
+                },
+                "comment": {
+                    "name": "comment",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "chemical": {
+                    "name": "chemical",
+                    "isArray": false,
+                    "type": {
+                        "model": "Chemical"
                     },
                     "isRequired": false,
                     "attributes": [],
                     "association": {
                         "connectionType": "BELONGS_TO",
-                        "targetName": "blogID"
-                    }
-                },
-                "comments": {
-                    "name": "comments",
-                    "isArray": true,
-                    "type": {
-                        "model": "Comment"
-                    },
-                    "isRequired": false,
-                    "attributes": [],
-                    "isArrayNullable": true,
-                    "association": {
-                        "connectionType": "HAS_MANY",
-                        "associatedWith": "post"
+                        "targetName": "chemicalID"
                     }
                 }
             },
             "syncable": true,
-            "pluralName": "Posts",
+            "pluralName": "Assays",
             "attributes": [
                 {
                     "type": "model",
                     "properties": {}
                 },
                 {
+                    "type": "versioned",
+                    "properties": {}
+                },
+                {
                     "type": "key",
                     "properties": {
-                        "name": "byBlog",
+                        "name": "byChemical",
                         "fields": [
-                            "blogID"
+                            "chemicalID"
                         ]
                     }
                 },
@@ -136,8 +109,8 @@ export const schema = {
                 }
             ]
         },
-        "Comment": {
-            "name": "Comment",
+        "Chemical": {
+            "name": "Chemical",
             "fields": {
                 "id": {
                     "name": "id",
@@ -146,43 +119,81 @@ export const schema = {
                     "isRequired": true,
                     "attributes": []
                 },
-                "post": {
-                    "name": "post",
+                "cid": {
+                    "name": "cid",
                     "isArray": false,
+                    "type": "Int",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "cas": {
+                    "name": "cas",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "iupac": {
+                    "name": "iupac",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "inchiKey": {
+                    "name": "inchiKey",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "otherNames": {
+                    "name": "otherNames",
+                    "isArray": true,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": [],
+                    "isArrayNullable": true
+                },
+                "smiles": {
+                    "name": "smiles",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "mw": {
+                    "name": "mw",
+                    "isArray": false,
+                    "type": "Float",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "assays": {
+                    "name": "assays",
+                    "isArray": true,
                     "type": {
-                        "model": "Post"
+                        "model": "Assay"
                     },
                     "isRequired": false,
                     "attributes": [],
+                    "isArrayNullable": true,
                     "association": {
-                        "connectionType": "BELONGS_TO",
-                        "targetName": "postID"
+                        "connectionType": "HAS_MANY",
+                        "associatedWith": "chemical"
                     }
-                },
-                "content": {
-                    "name": "content",
-                    "isArray": false,
-                    "type": "String",
-                    "isRequired": true,
-                    "attributes": []
                 }
             },
             "syncable": true,
-            "pluralName": "Comments",
+            "pluralName": "Chemicals",
             "attributes": [
                 {
                     "type": "model",
                     "properties": {}
                 },
                 {
-                    "type": "key",
-                    "properties": {
-                        "name": "byPost",
-                        "fields": [
-                            "postID",
-                            "content"
-                        ]
-                    }
+                    "type": "versioned",
+                    "properties": {}
                 },
                 {
                     "type": "auth",
@@ -204,6 +215,85 @@ export const schema = {
         }
     },
     "enums": {},
-    "nonModels": {},
-    "version": "7f92f26e1ff07da47b2e1b6f4cc28c51"
+    "nonModels": {
+        "Response": {
+            "name": "Response",
+            "fields": {
+                "status": {
+                    "name": "status",
+                    "isArray": false,
+                    "type": "Int",
+                    "isRequired": true,
+                    "attributes": []
+                },
+                "message": {
+                    "name": "message",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                }
+            }
+        },
+        "EnzymaticAssayData": {
+            "name": "EnzymaticAssayData",
+            "fields": {
+                "protein": {
+                    "name": "protein",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "gene": {
+                    "name": "gene",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "concentrationSubstrate": {
+                    "name": "concentrationSubstrate",
+                    "isArray": false,
+                    "type": "Float",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "concentrationTested": {
+                    "name": "concentrationTested",
+                    "isArray": false,
+                    "type": "Float",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "inhibition": {
+                    "name": "inhibition",
+                    "isArray": false,
+                    "type": "Float",
+                    "isRequired": false,
+                    "attributes": []
+                },
+                "ec50": {
+                    "name": "ec50",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                }
+            }
+        },
+        "AhrAssayData": {
+            "name": "AhrAssayData",
+            "fields": {
+                "ahrType": {
+                    "name": "ahrType",
+                    "isArray": false,
+                    "type": "String",
+                    "isRequired": false,
+                    "attributes": []
+                }
+            }
+        }
+    },
+    "version": "5b25ece638338b1a420ecd9706f4559a"
 };

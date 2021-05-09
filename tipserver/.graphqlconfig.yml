@@ -1,6 +1,6 @@
 projects:
   tip:
-    schemaPath: src/graphql/schema.json
+    schemaPath: amplify/backend/api/tip/build/schema.graphql
     includes:
       - src/graphql/**/*.graphql
     excludes:
@@ -10,6 +10,9 @@ projects:
         codeGenTarget: angular
         generatedFileName: src/app/core/services/API.service.ts
         docsFilePath: src/graphql
+        region: us-west-2
+        apiId: null
+        maxDepth: 3
 extensions:
   amplify:
     version: 3

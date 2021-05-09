@@ -26,13 +26,14 @@ mutation CreateAssay(
     _lastChangedAt
     createdAt
     updatedAt
+    version
     chemical {
       id
       cid
       cas
       iupac
-      inchikey
-      other_names
+      inchiKey
+      otherNames
       smiles
       mw
       _version
@@ -40,6 +41,7 @@ mutation CreateAssay(
       _lastChangedAt
       createdAt
       updatedAt
+      version
       assays {
         nextToken
         startedAt
@@ -74,13 +76,14 @@ mutation UpdateAssay(
     _lastChangedAt
     createdAt
     updatedAt
+    version
     chemical {
       id
       cid
       cas
       iupac
-      inchikey
-      other_names
+      inchiKey
+      otherNames
       smiles
       mw
       _version
@@ -88,6 +91,7 @@ mutation UpdateAssay(
       _lastChangedAt
       createdAt
       updatedAt
+      version
       assays {
         nextToken
         startedAt
@@ -122,13 +126,14 @@ mutation DeleteAssay(
     _lastChangedAt
     createdAt
     updatedAt
+    version
     chemical {
       id
       cid
       cas
       iupac
-      inchikey
-      other_names
+      inchiKey
+      otherNames
       smiles
       mw
       _version
@@ -136,6 +141,7 @@ mutation DeleteAssay(
       _lastChangedAt
       createdAt
       updatedAt
+      version
       assays {
         nextToken
         startedAt
@@ -152,8 +158,8 @@ mutation CreateChemical(
     cid
     cas
     iupac
-    inchikey
-    other_names
+    inchiKey
+    otherNames
     smiles
     mw
     _version
@@ -161,6 +167,7 @@ mutation CreateChemical(
     _lastChangedAt
     createdAt
     updatedAt
+    version
     assays {
       items {
         id
@@ -174,6 +181,7 @@ mutation CreateChemical(
         _lastChangedAt
         createdAt
         updatedAt
+        version
       }
       nextToken
       startedAt
@@ -189,8 +197,8 @@ mutation UpdateChemical(
     cid
     cas
     iupac
-    inchikey
-    other_names
+    inchiKey
+    otherNames
     smiles
     mw
     _version
@@ -198,6 +206,7 @@ mutation UpdateChemical(
     _lastChangedAt
     createdAt
     updatedAt
+    version
     assays {
       items {
         id
@@ -211,6 +220,7 @@ mutation UpdateChemical(
         _lastChangedAt
         createdAt
         updatedAt
+        version
       }
       nextToken
       startedAt
@@ -226,8 +236,8 @@ mutation DeleteChemical(
     cid
     cas
     iupac
-    inchikey
-    other_names
+    inchiKey
+    otherNames
     smiles
     mw
     _version
@@ -235,6 +245,7 @@ mutation DeleteChemical(
     _lastChangedAt
     createdAt
     updatedAt
+    version
     assays {
       items {
         id
@@ -248,6 +259,7 @@ mutation DeleteChemical(
         _lastChangedAt
         createdAt
         updatedAt
+        version
       }
       nextToken
       startedAt

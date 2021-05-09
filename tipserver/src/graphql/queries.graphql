@@ -1,4 +1,56 @@
 # this is an auto generated file. This will be overwritten
+query ValidateAssay(
+  $type: String!
+  $protein: String
+  $gene: String
+  $concentrationSubstrate: Float
+  $concentrationTested: Float
+  $inhibition: Float
+  $ec50: String
+  $ahrType: String
+  $species: String
+  $pmids: [Int]
+  $comment: String
+) {
+  validateAssay(
+    type: $type
+    protein: $protein
+    gene: $gene
+    concentrationSubstrate: $concentrationSubstrate
+    concentrationTested: $concentrationTested
+    inhibition: $inhibition
+    ec50: $ec50
+    ahrType: $ahrType
+    species: $species
+    pmids: $pmids
+    comment: $comment
+  ) {
+    status
+    message
+  }
+}
+query ValidateChemical(
+  $cid: Int
+  $cas: String
+  $iupac: String
+  $inchiKey: String
+  $otherNames: [String]
+  $smiles: String
+  $mw: Float
+) {
+  validateChemical(
+    cid: $cid
+    cas: $cas
+    iupac: $iupac
+    inchiKey: $inchiKey
+    otherNames: $otherNames
+    smiles: $smiles
+    mw: $mw
+  ) {
+    status
+    message
+  }
+}
 query GetAssay($id: ID!) {
   getAssay(id: $id) {
     id
@@ -23,13 +75,14 @@ query GetAssay($id: ID!) {
     _lastChangedAt
     createdAt
     updatedAt
+    version
     chemical {
       id
       cid
       cas
       iupac
-      inchikey
-      other_names
+      inchiKey
+      otherNames
       smiles
       mw
       _version
@@ -37,6 +90,7 @@ query GetAssay($id: ID!) {
       _lastChangedAt
       createdAt
       updatedAt
+      version
       assays {
         nextToken
         startedAt
@@ -73,13 +127,14 @@ query ListAssays(
       _lastChangedAt
       createdAt
       updatedAt
+      version
       chemical {
         id
         cid
         cas
         iupac
-        inchikey
-        other_names
+        inchiKey
+        otherNames
         smiles
         mw
         _version
@@ -87,6 +142,7 @@ query ListAssays(
         _lastChangedAt
         createdAt
         updatedAt
+        version
       }
     }
     nextToken
@@ -128,13 +184,14 @@ query SyncAssays(
       _lastChangedAt
       createdAt
       updatedAt
+      version
       chemical {
         id
         cid
         cas
         iupac
-        inchikey
-        other_names
+        inchiKey
+        otherNames
         smiles
         mw
         _version
@@ -142,6 +199,7 @@ query SyncAssays(
         _lastChangedAt
         createdAt
         updatedAt
+        version
       }
     }
     nextToken
@@ -159,8 +217,8 @@ query ListChemicals(
       cid
       cas
       iupac
-      inchikey
-      other_names
+      inchiKey
+      otherNames
       smiles
       mw
       _version
@@ -168,6 +226,7 @@ query ListChemicals(
       _lastChangedAt
       createdAt
       updatedAt
+      version
       assays {
         nextToken
         startedAt
@@ -183,8 +242,8 @@ query GetChemical($id: ID!) {
     cid
     cas
     iupac
-    inchikey
-    other_names
+    inchiKey
+    otherNames
     smiles
     mw
     _version
@@ -192,6 +251,7 @@ query GetChemical($id: ID!) {
     _lastChangedAt
     createdAt
     updatedAt
+    version
     assays {
       items {
         id
@@ -205,6 +265,7 @@ query GetChemical($id: ID!) {
         _lastChangedAt
         createdAt
         updatedAt
+        version
       }
       nextToken
       startedAt
@@ -228,8 +289,8 @@ query SyncChemicals(
       cid
       cas
       iupac
-      inchikey
-      other_names
+      inchiKey
+      otherNames
       smiles
       mw
       _version
@@ -237,6 +298,7 @@ query SyncChemicals(
       _lastChangedAt
       createdAt
       updatedAt
+      version
       assays {
         nextToken
         startedAt
