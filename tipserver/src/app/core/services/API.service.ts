@@ -18,6 +18,7 @@ export type CreateAssayInput = {
   pmids?: Array<number | null> | null;
   comment?: string | null;
   chemicalID: string;
+  _version?: number | null;
 };
 
 export type EnzymaticAssayDataInput = {
@@ -30,7 +31,7 @@ export type EnzymaticAssayDataInput = {
 };
 
 export type AhrAssayDataInput = {
-  ahrType: string;
+  ahrType?: string | null;
 };
 
 export type ModelAssayConditionInput = {
@@ -121,9 +122,13 @@ export type Assay = {
   pmids?: Array<number | null> | null;
   comment?: string | null;
   chemicalID?: string;
-  chemical?: Chemical;
+  _version?: number;
+  _deleted?: boolean | null;
+  _lastChangedAt?: number;
   createdAt?: string;
   updatedAt?: string;
+  version?: number;
+  chemical?: Chemical;
 };
 
 export type EnzymaticAssayData = {
@@ -138,7 +143,7 @@ export type EnzymaticAssayData = {
 
 export type AhrAssayData = {
   __typename: "AhrAssayData";
-  ahrType?: string;
+  ahrType?: string | null;
 };
 
 export type Chemical = {
@@ -147,19 +152,24 @@ export type Chemical = {
   cid?: number | null;
   cas?: string | null;
   iupac?: string | null;
-  inchikey?: string | null;
-  other_names?: Array<string | null> | null;
+  inchiKey?: string | null;
+  otherNames?: Array<string | null> | null;
   smiles?: string | null;
   mw?: number | null;
-  assays?: ModelAssayConnection;
+  _version?: number;
+  _deleted?: boolean | null;
+  _lastChangedAt?: number;
   createdAt?: string;
   updatedAt?: string;
+  version?: number;
+  assays?: ModelAssayConnection;
 };
 
 export type ModelAssayConnection = {
   __typename: "ModelAssayConnection";
   items?: Array<Assay | null> | null;
   nextToken?: string | null;
+  startedAt?: number | null;
 };
 
 export type UpdateAssayInput = {
@@ -171,10 +181,14 @@ export type UpdateAssayInput = {
   pmids?: Array<number | null> | null;
   comment?: string | null;
   chemicalID?: string | null;
+  _version?: number | null;
+  expectedVersion: number;
 };
 
 export type DeleteAssayInput = {
   id?: string | null;
+  _version?: number | null;
+  expectedVersion: number;
 };
 
 export type CreateChemicalInput = {
@@ -182,18 +196,19 @@ export type CreateChemicalInput = {
   cid?: number | null;
   cas?: string | null;
   iupac?: string | null;
-  inchikey?: string | null;
-  other_names?: Array<string | null> | null;
+  inchiKey?: string | null;
+  otherNames?: Array<string | null> | null;
   smiles?: string | null;
   mw?: number | null;
+  _version?: number | null;
 };
 
 export type ModelChemicalConditionInput = {
   cid?: ModelIntInput | null;
   cas?: ModelStringInput | null;
   iupac?: ModelStringInput | null;
-  inchikey?: ModelStringInput | null;
-  other_names?: ModelStringInput | null;
+  inchiKey?: ModelStringInput | null;
+  otherNames?: ModelStringInput | null;
   smiles?: ModelStringInput | null;
   mw?: ModelFloatInput | null;
   and?: Array<ModelChemicalConditionInput | null> | null;
@@ -218,14 +233,18 @@ export type UpdateChemicalInput = {
   cid?: number | null;
   cas?: string | null;
   iupac?: string | null;
-  inchikey?: string | null;
-  other_names?: Array<string | null> | null;
+  inchiKey?: string | null;
+  otherNames?: Array<string | null> | null;
   smiles?: string | null;
   mw?: number | null;
+  _version?: number | null;
+  expectedVersion: number;
 };
 
 export type DeleteChemicalInput = {
   id?: string | null;
+  _version?: number | null;
+  expectedVersion: number;
 };
 
 export type Response = {
@@ -251,8 +270,8 @@ export type ModelChemicalFilterInput = {
   cid?: ModelIntInput | null;
   cas?: ModelStringInput | null;
   iupac?: ModelStringInput | null;
-  inchikey?: ModelStringInput | null;
-  other_names?: ModelStringInput | null;
+  inchiKey?: ModelStringInput | null;
+  otherNames?: ModelStringInput | null;
   smiles?: ModelStringInput | null;
   mw?: ModelFloatInput | null;
   and?: Array<ModelChemicalFilterInput | null> | null;
@@ -264,6 +283,7 @@ export type ModelChemicalConnection = {
   __typename: "ModelChemicalConnection";
   items?: Array<Chemical | null> | null;
   nextToken?: string | null;
+  startedAt?: number | null;
 };
 
 export type CreateAssayMutation = {
@@ -281,31 +301,40 @@ export type CreateAssayMutation = {
   } | null;
   ahrData?: {
     __typename: "AhrAssayData";
-    ahrType: string;
+    ahrType?: string | null;
   } | null;
   species?: string | null;
   pmids?: Array<number | null> | null;
   comment?: string | null;
   chemicalID: string;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
+  createdAt: string;
+  updatedAt: string;
+  version: number;
   chemical?: {
     __typename: "Chemical";
     id: string;
     cid?: number | null;
     cas?: string | null;
     iupac?: string | null;
-    inchikey?: string | null;
-    other_names?: Array<string | null> | null;
+    inchiKey?: string | null;
+    otherNames?: Array<string | null> | null;
     smiles?: string | null;
     mw?: number | null;
+    _version: number;
+    _deleted?: boolean | null;
+    _lastChangedAt: number;
+    createdAt: string;
+    updatedAt: string;
+    version: number;
     assays?: {
       __typename: "ModelAssayConnection";
       nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
-    createdAt: string;
-    updatedAt: string;
   } | null;
-  createdAt: string;
-  updatedAt: string;
 };
 
 export type UpdateAssayMutation = {
@@ -323,31 +352,40 @@ export type UpdateAssayMutation = {
   } | null;
   ahrData?: {
     __typename: "AhrAssayData";
-    ahrType: string;
+    ahrType?: string | null;
   } | null;
   species?: string | null;
   pmids?: Array<number | null> | null;
   comment?: string | null;
   chemicalID: string;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
+  createdAt: string;
+  updatedAt: string;
+  version: number;
   chemical?: {
     __typename: "Chemical";
     id: string;
     cid?: number | null;
     cas?: string | null;
     iupac?: string | null;
-    inchikey?: string | null;
-    other_names?: Array<string | null> | null;
+    inchiKey?: string | null;
+    otherNames?: Array<string | null> | null;
     smiles?: string | null;
     mw?: number | null;
+    _version: number;
+    _deleted?: boolean | null;
+    _lastChangedAt: number;
+    createdAt: string;
+    updatedAt: string;
+    version: number;
     assays?: {
       __typename: "ModelAssayConnection";
       nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
-    createdAt: string;
-    updatedAt: string;
   } | null;
-  createdAt: string;
-  updatedAt: string;
 };
 
 export type DeleteAssayMutation = {
@@ -365,31 +403,40 @@ export type DeleteAssayMutation = {
   } | null;
   ahrData?: {
     __typename: "AhrAssayData";
-    ahrType: string;
+    ahrType?: string | null;
   } | null;
   species?: string | null;
   pmids?: Array<number | null> | null;
   comment?: string | null;
   chemicalID: string;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
+  createdAt: string;
+  updatedAt: string;
+  version: number;
   chemical?: {
     __typename: "Chemical";
     id: string;
     cid?: number | null;
     cas?: string | null;
     iupac?: string | null;
-    inchikey?: string | null;
-    other_names?: Array<string | null> | null;
+    inchiKey?: string | null;
+    otherNames?: Array<string | null> | null;
     smiles?: string | null;
     mw?: number | null;
+    _version: number;
+    _deleted?: boolean | null;
+    _lastChangedAt: number;
+    createdAt: string;
+    updatedAt: string;
+    version: number;
     assays?: {
       __typename: "ModelAssayConnection";
       nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
-    createdAt: string;
-    updatedAt: string;
   } | null;
-  createdAt: string;
-  updatedAt: string;
 };
 
 export type CreateChemicalMutation = {
@@ -398,10 +445,16 @@ export type CreateChemicalMutation = {
   cid?: number | null;
   cas?: string | null;
   iupac?: string | null;
-  inchikey?: string | null;
-  other_names?: Array<string | null> | null;
+  inchiKey?: string | null;
+  otherNames?: Array<string | null> | null;
   smiles?: string | null;
   mw?: number | null;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
+  createdAt: string;
+  updatedAt: string;
+  version: number;
   assays?: {
     __typename: "ModelAssayConnection";
     items?: Array<{
@@ -412,13 +465,16 @@ export type CreateChemicalMutation = {
       pmids?: Array<number | null> | null;
       comment?: string | null;
       chemicalID: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
       createdAt: string;
       updatedAt: string;
+      version: number;
     } | null> | null;
     nextToken?: string | null;
+    startedAt?: number | null;
   } | null;
-  createdAt: string;
-  updatedAt: string;
 };
 
 export type UpdateChemicalMutation = {
@@ -427,10 +483,16 @@ export type UpdateChemicalMutation = {
   cid?: number | null;
   cas?: string | null;
   iupac?: string | null;
-  inchikey?: string | null;
-  other_names?: Array<string | null> | null;
+  inchiKey?: string | null;
+  otherNames?: Array<string | null> | null;
   smiles?: string | null;
   mw?: number | null;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
+  createdAt: string;
+  updatedAt: string;
+  version: number;
   assays?: {
     __typename: "ModelAssayConnection";
     items?: Array<{
@@ -441,13 +503,16 @@ export type UpdateChemicalMutation = {
       pmids?: Array<number | null> | null;
       comment?: string | null;
       chemicalID: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
       createdAt: string;
       updatedAt: string;
+      version: number;
     } | null> | null;
     nextToken?: string | null;
+    startedAt?: number | null;
   } | null;
-  createdAt: string;
-  updatedAt: string;
 };
 
 export type DeleteChemicalMutation = {
@@ -456,10 +521,16 @@ export type DeleteChemicalMutation = {
   cid?: number | null;
   cas?: string | null;
   iupac?: string | null;
-  inchikey?: string | null;
-  other_names?: Array<string | null> | null;
+  inchiKey?: string | null;
+  otherNames?: Array<string | null> | null;
   smiles?: string | null;
   mw?: number | null;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
+  createdAt: string;
+  updatedAt: string;
+  version: number;
   assays?: {
     __typename: "ModelAssayConnection";
     items?: Array<{
@@ -470,13 +541,16 @@ export type DeleteChemicalMutation = {
       pmids?: Array<number | null> | null;
       comment?: string | null;
       chemicalID: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
       createdAt: string;
       updatedAt: string;
+      version: number;
     } | null> | null;
     nextToken?: string | null;
+    startedAt?: number | null;
   } | null;
-  createdAt: string;
-  updatedAt: string;
 };
 
 export type ValidateAssayQuery = {
@@ -506,31 +580,40 @@ export type GetAssayQuery = {
   } | null;
   ahrData?: {
     __typename: "AhrAssayData";
-    ahrType: string;
+    ahrType?: string | null;
   } | null;
   species?: string | null;
   pmids?: Array<number | null> | null;
   comment?: string | null;
   chemicalID: string;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
+  createdAt: string;
+  updatedAt: string;
+  version: number;
   chemical?: {
     __typename: "Chemical";
     id: string;
     cid?: number | null;
     cas?: string | null;
     iupac?: string | null;
-    inchikey?: string | null;
-    other_names?: Array<string | null> | null;
+    inchiKey?: string | null;
+    otherNames?: Array<string | null> | null;
     smiles?: string | null;
     mw?: number | null;
+    _version: number;
+    _deleted?: boolean | null;
+    _lastChangedAt: number;
+    createdAt: string;
+    updatedAt: string;
+    version: number;
     assays?: {
       __typename: "ModelAssayConnection";
       nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
-    createdAt: string;
-    updatedAt: string;
   } | null;
-  createdAt: string;
-  updatedAt: string;
 };
 
 export type ListAssaysQuery = {
@@ -550,58 +633,89 @@ export type ListAssaysQuery = {
     } | null;
     ahrData?: {
       __typename: "AhrAssayData";
-      ahrType: string;
+      ahrType?: string | null;
     } | null;
     species?: string | null;
     pmids?: Array<number | null> | null;
     comment?: string | null;
     chemicalID: string;
+    _version: number;
+    _deleted?: boolean | null;
+    _lastChangedAt: number;
+    createdAt: string;
+    updatedAt: string;
+    version: number;
     chemical?: {
       __typename: "Chemical";
       id: string;
       cid?: number | null;
       cas?: string | null;
       iupac?: string | null;
-      inchikey?: string | null;
-      other_names?: Array<string | null> | null;
+      inchiKey?: string | null;
+      otherNames?: Array<string | null> | null;
       smiles?: string | null;
       mw?: number | null;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
       createdAt: string;
       updatedAt: string;
+      version: number;
     } | null;
-    createdAt: string;
-    updatedAt: string;
   } | null> | null;
   nextToken?: string | null;
+  startedAt?: number | null;
 };
 
-export type GetChemicalQuery = {
-  __typename: "Chemical";
-  id: string;
-  cid?: number | null;
-  cas?: string | null;
-  iupac?: string | null;
-  inchikey?: string | null;
-  other_names?: Array<string | null> | null;
-  smiles?: string | null;
-  mw?: number | null;
-  assays?: {
-    __typename: "ModelAssayConnection";
-    items?: Array<{
-      __typename: "Assay";
+export type SyncAssaysQuery = {
+  __typename: "ModelAssayConnection";
+  items?: Array<{
+    __typename: "Assay";
+    id: string;
+    type: string;
+    enzymeData?: {
+      __typename: "EnzymaticAssayData";
+      protein?: string | null;
+      gene?: string | null;
+      concentrationSubstrate?: number | null;
+      concentrationTested?: number | null;
+      inhibition?: number | null;
+      ec50?: string | null;
+    } | null;
+    ahrData?: {
+      __typename: "AhrAssayData";
+      ahrType?: string | null;
+    } | null;
+    species?: string | null;
+    pmids?: Array<number | null> | null;
+    comment?: string | null;
+    chemicalID: string;
+    _version: number;
+    _deleted?: boolean | null;
+    _lastChangedAt: number;
+    createdAt: string;
+    updatedAt: string;
+    version: number;
+    chemical?: {
+      __typename: "Chemical";
       id: string;
-      type: string;
-      species?: string | null;
-      pmids?: Array<number | null> | null;
-      comment?: string | null;
-      chemicalID: string;
+      cid?: number | null;
+      cas?: string | null;
+      iupac?: string | null;
+      inchiKey?: string | null;
+      otherNames?: Array<string | null> | null;
+      smiles?: string | null;
+      mw?: number | null;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
       createdAt: string;
       updatedAt: string;
-    } | null> | null;
-    nextToken?: string | null;
-  } | null;
-  createdAt: string;
-  updatedAt: string;
+      version: number;
+    } | null;
+  } | null> | null;
+  nextToken?: string | null;
+  startedAt?: number | null;
 };
 
 export type ListChemicalsQuery = {
@@ -612,18 +726,90 @@ export type ListChemicalsQuery = {
     cid?: number | null;
     cas?: string | null;
     iupac?: string | null;
-    inchikey?: string | null;
-    other_names?: Array<string | null> | null;
+    inchiKey?: string | null;
+    otherNames?: Array<string | null> | null;
     smiles?: string | null;
     mw?: number | null;
+    _version: number;
+    _deleted?: boolean | null;
+    _lastChangedAt: number;
+    createdAt: string;
+    updatedAt: string;
+    version: number;
     assays?: {
       __typename: "ModelAssayConnection";
       nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
-    createdAt: string;
-    updatedAt: string;
   } | null> | null;
   nextToken?: string | null;
+  startedAt?: number | null;
+};
+
+export type GetChemicalQuery = {
+  __typename: "Chemical";
+  id: string;
+  cid?: number | null;
+  cas?: string | null;
+  iupac?: string | null;
+  inchiKey?: string | null;
+  otherNames?: Array<string | null> | null;
+  smiles?: string | null;
+  mw?: number | null;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
+  createdAt: string;
+  updatedAt: string;
+  version: number;
+  assays?: {
+    __typename: "ModelAssayConnection";
+    items?: Array<{
+      __typename: "Assay";
+      id: string;
+      type: string;
+      species?: string | null;
+      pmids?: Array<number | null> | null;
+      comment?: string | null;
+      chemicalID: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
+      createdAt: string;
+      updatedAt: string;
+      version: number;
+    } | null> | null;
+    nextToken?: string | null;
+    startedAt?: number | null;
+  } | null;
+};
+
+export type SyncChemicalsQuery = {
+  __typename: "ModelChemicalConnection";
+  items?: Array<{
+    __typename: "Chemical";
+    id: string;
+    cid?: number | null;
+    cas?: string | null;
+    iupac?: string | null;
+    inchiKey?: string | null;
+    otherNames?: Array<string | null> | null;
+    smiles?: string | null;
+    mw?: number | null;
+    _version: number;
+    _deleted?: boolean | null;
+    _lastChangedAt: number;
+    createdAt: string;
+    updatedAt: string;
+    version: number;
+    assays?: {
+      __typename: "ModelAssayConnection";
+      nextToken?: string | null;
+      startedAt?: number | null;
+    } | null;
+  } | null> | null;
+  nextToken?: string | null;
+  startedAt?: number | null;
 };
 
 export type OnCreateAssaySubscription = {
@@ -641,31 +827,40 @@ export type OnCreateAssaySubscription = {
   } | null;
   ahrData?: {
     __typename: "AhrAssayData";
-    ahrType: string;
+    ahrType?: string | null;
   } | null;
   species?: string | null;
   pmids?: Array<number | null> | null;
   comment?: string | null;
   chemicalID: string;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
+  createdAt: string;
+  updatedAt: string;
+  version: number;
   chemical?: {
     __typename: "Chemical";
     id: string;
     cid?: number | null;
     cas?: string | null;
     iupac?: string | null;
-    inchikey?: string | null;
-    other_names?: Array<string | null> | null;
+    inchiKey?: string | null;
+    otherNames?: Array<string | null> | null;
     smiles?: string | null;
     mw?: number | null;
+    _version: number;
+    _deleted?: boolean | null;
+    _lastChangedAt: number;
+    createdAt: string;
+    updatedAt: string;
+    version: number;
     assays?: {
       __typename: "ModelAssayConnection";
       nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
-    createdAt: string;
-    updatedAt: string;
   } | null;
-  createdAt: string;
-  updatedAt: string;
 };
 
 export type OnUpdateAssaySubscription = {
@@ -683,31 +878,40 @@ export type OnUpdateAssaySubscription = {
   } | null;
   ahrData?: {
     __typename: "AhrAssayData";
-    ahrType: string;
+    ahrType?: string | null;
   } | null;
   species?: string | null;
   pmids?: Array<number | null> | null;
   comment?: string | null;
   chemicalID: string;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
+  createdAt: string;
+  updatedAt: string;
+  version: number;
   chemical?: {
     __typename: "Chemical";
     id: string;
     cid?: number | null;
     cas?: string | null;
     iupac?: string | null;
-    inchikey?: string | null;
-    other_names?: Array<string | null> | null;
+    inchiKey?: string | null;
+    otherNames?: Array<string | null> | null;
     smiles?: string | null;
     mw?: number | null;
+    _version: number;
+    _deleted?: boolean | null;
+    _lastChangedAt: number;
+    createdAt: string;
+    updatedAt: string;
+    version: number;
     assays?: {
       __typename: "ModelAssayConnection";
       nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
-    createdAt: string;
-    updatedAt: string;
   } | null;
-  createdAt: string;
-  updatedAt: string;
 };
 
 export type OnDeleteAssaySubscription = {
@@ -725,31 +929,40 @@ export type OnDeleteAssaySubscription = {
   } | null;
   ahrData?: {
     __typename: "AhrAssayData";
-    ahrType: string;
+    ahrType?: string | null;
   } | null;
   species?: string | null;
   pmids?: Array<number | null> | null;
   comment?: string | null;
   chemicalID: string;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
+  createdAt: string;
+  updatedAt: string;
+  version: number;
   chemical?: {
     __typename: "Chemical";
     id: string;
     cid?: number | null;
     cas?: string | null;
     iupac?: string | null;
-    inchikey?: string | null;
-    other_names?: Array<string | null> | null;
+    inchiKey?: string | null;
+    otherNames?: Array<string | null> | null;
     smiles?: string | null;
     mw?: number | null;
+    _version: number;
+    _deleted?: boolean | null;
+    _lastChangedAt: number;
+    createdAt: string;
+    updatedAt: string;
+    version: number;
     assays?: {
       __typename: "ModelAssayConnection";
       nextToken?: string | null;
+      startedAt?: number | null;
     } | null;
-    createdAt: string;
-    updatedAt: string;
   } | null;
-  createdAt: string;
-  updatedAt: string;
 };
 
 export type OnCreateChemicalSubscription = {
@@ -758,10 +971,16 @@ export type OnCreateChemicalSubscription = {
   cid?: number | null;
   cas?: string | null;
   iupac?: string | null;
-  inchikey?: string | null;
-  other_names?: Array<string | null> | null;
+  inchiKey?: string | null;
+  otherNames?: Array<string | null> | null;
   smiles?: string | null;
   mw?: number | null;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
+  createdAt: string;
+  updatedAt: string;
+  version: number;
   assays?: {
     __typename: "ModelAssayConnection";
     items?: Array<{
@@ -772,13 +991,16 @@ export type OnCreateChemicalSubscription = {
       pmids?: Array<number | null> | null;
       comment?: string | null;
       chemicalID: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
       createdAt: string;
       updatedAt: string;
+      version: number;
     } | null> | null;
     nextToken?: string | null;
+    startedAt?: number | null;
   } | null;
-  createdAt: string;
-  updatedAt: string;
 };
 
 export type OnUpdateChemicalSubscription = {
@@ -787,10 +1009,16 @@ export type OnUpdateChemicalSubscription = {
   cid?: number | null;
   cas?: string | null;
   iupac?: string | null;
-  inchikey?: string | null;
-  other_names?: Array<string | null> | null;
+  inchiKey?: string | null;
+  otherNames?: Array<string | null> | null;
   smiles?: string | null;
   mw?: number | null;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
+  createdAt: string;
+  updatedAt: string;
+  version: number;
   assays?: {
     __typename: "ModelAssayConnection";
     items?: Array<{
@@ -801,13 +1029,16 @@ export type OnUpdateChemicalSubscription = {
       pmids?: Array<number | null> | null;
       comment?: string | null;
       chemicalID: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
       createdAt: string;
       updatedAt: string;
+      version: number;
     } | null> | null;
     nextToken?: string | null;
+    startedAt?: number | null;
   } | null;
-  createdAt: string;
-  updatedAt: string;
 };
 
 export type OnDeleteChemicalSubscription = {
@@ -816,10 +1047,16 @@ export type OnDeleteChemicalSubscription = {
   cid?: number | null;
   cas?: string | null;
   iupac?: string | null;
-  inchikey?: string | null;
-  other_names?: Array<string | null> | null;
+  inchiKey?: string | null;
+  otherNames?: Array<string | null> | null;
   smiles?: string | null;
   mw?: number | null;
+  _version: number;
+  _deleted?: boolean | null;
+  _lastChangedAt: number;
+  createdAt: string;
+  updatedAt: string;
+  version: number;
   assays?: {
     __typename: "ModelAssayConnection";
     items?: Array<{
@@ -830,13 +1067,16 @@ export type OnDeleteChemicalSubscription = {
       pmids?: Array<number | null> | null;
       comment?: string | null;
       chemicalID: string;
+      _version: number;
+      _deleted?: boolean | null;
+      _lastChangedAt: number;
       createdAt: string;
       updatedAt: string;
+      version: number;
     } | null> | null;
     nextToken?: string | null;
+    startedAt?: number | null;
   } | null;
-  createdAt: string;
-  updatedAt: string;
 };
 
 @Injectable({
@@ -869,25 +1109,34 @@ export class APIService {
           pmids
           comment
           chemicalID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+          version
           chemical {
             __typename
             id
             cid
             cas
             iupac
-            inchikey
-            other_names
+            inchiKey
+            otherNames
             smiles
             mw
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+            version
             assays {
               __typename
               nextToken
+              startedAt
             }
-            createdAt
-            updatedAt
           }
-          createdAt
-          updatedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -927,25 +1176,34 @@ export class APIService {
           pmids
           comment
           chemicalID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+          version
           chemical {
             __typename
             id
             cid
             cas
             iupac
-            inchikey
-            other_names
+            inchiKey
+            otherNames
             smiles
             mw
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+            version
             assays {
               __typename
               nextToken
+              startedAt
             }
-            createdAt
-            updatedAt
           }
-          createdAt
-          updatedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -985,25 +1243,34 @@ export class APIService {
           pmids
           comment
           chemicalID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+          version
           chemical {
             __typename
             id
             cid
             cas
             iupac
-            inchikey
-            other_names
+            inchiKey
+            otherNames
             smiles
             mw
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+            version
             assays {
               __typename
               nextToken
+              startedAt
             }
-            createdAt
-            updatedAt
           }
-          createdAt
-          updatedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -1028,10 +1295,16 @@ export class APIService {
           cid
           cas
           iupac
-          inchikey
-          other_names
+          inchiKey
+          otherNames
           smiles
           mw
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+          version
           assays {
             __typename
             items {
@@ -1042,13 +1315,16 @@ export class APIService {
               pmids
               comment
               chemicalID
+              _version
+              _deleted
+              _lastChangedAt
               createdAt
               updatedAt
+              version
             }
             nextToken
+            startedAt
           }
-          createdAt
-          updatedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -1073,10 +1349,16 @@ export class APIService {
           cid
           cas
           iupac
-          inchikey
-          other_names
+          inchiKey
+          otherNames
           smiles
           mw
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+          version
           assays {
             __typename
             items {
@@ -1087,13 +1369,16 @@ export class APIService {
               pmids
               comment
               chemicalID
+              _version
+              _deleted
+              _lastChangedAt
               createdAt
               updatedAt
+              version
             }
             nextToken
+            startedAt
           }
-          createdAt
-          updatedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -1118,10 +1403,16 @@ export class APIService {
           cid
           cas
           iupac
-          inchikey
-          other_names
+          inchiKey
+          otherNames
           smiles
           mw
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+          version
           assays {
             __typename
             items {
@@ -1132,13 +1423,16 @@ export class APIService {
               pmids
               comment
               chemicalID
+              _version
+              _deleted
+              _lastChangedAt
               createdAt
               updatedAt
+              version
             }
             nextToken
+            startedAt
           }
-          createdAt
-          updatedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -1276,25 +1570,34 @@ export class APIService {
           pmids
           comment
           chemicalID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+          version
           chemical {
             __typename
             id
             cid
             cas
             iupac
-            inchikey
-            other_names
+            inchiKey
+            otherNames
             smiles
             mw
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+            version
             assays {
               __typename
               nextToken
+              startedAt
             }
-            createdAt
-            updatedAt
           }
-          createdAt
-          updatedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {
@@ -1334,23 +1637,32 @@ export class APIService {
             pmids
             comment
             chemicalID
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+            version
             chemical {
               __typename
               id
               cid
               cas
               iupac
-              inchikey
-              other_names
+              inchiKey
+              otherNames
               smiles
               mw
+              _version
+              _deleted
+              _lastChangedAt
               createdAt
               updatedAt
+              version
             }
-            createdAt
-            updatedAt
           }
           nextToken
+          startedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {};
@@ -1368,44 +1680,81 @@ export class APIService {
     )) as any;
     return <ListAssaysQuery>response.data.listAssays;
   }
-  async GetChemical(id: string): Promise<GetChemicalQuery> {
-    const statement = `query GetChemical($id: ID!) {
-        getChemical(id: $id) {
+  async SyncAssays(
+    filter?: ModelAssayFilterInput,
+    limit?: number,
+    nextToken?: string,
+    lastSync?: number
+  ): Promise<SyncAssaysQuery> {
+    const statement = `query SyncAssays($filter: ModelAssayFilterInput, $limit: Int, $nextToken: String, $lastSync: AWSTimestamp) {
+        syncAssays(filter: $filter, limit: $limit, nextToken: $nextToken, lastSync: $lastSync) {
           __typename
-          id
-          cid
-          cas
-          iupac
-          inchikey
-          other_names
-          smiles
-          mw
-          assays {
+          items {
             __typename
-            items {
+            id
+            type
+            enzymeData {
+              __typename
+              protein
+              gene
+              concentrationSubstrate
+              concentrationTested
+              inhibition
+              ec50
+            }
+            ahrData {
+              __typename
+              ahrType
+            }
+            species
+            pmids
+            comment
+            chemicalID
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+            version
+            chemical {
               __typename
               id
-              type
-              species
-              pmids
-              comment
-              chemicalID
+              cid
+              cas
+              iupac
+              inchiKey
+              otherNames
+              smiles
+              mw
+              _version
+              _deleted
+              _lastChangedAt
               createdAt
               updatedAt
+              version
             }
-            nextToken
           }
-          createdAt
-          updatedAt
+          nextToken
+          startedAt
         }
       }`;
-    const gqlAPIServiceArguments: any = {
-      id
-    };
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    if (limit) {
+      gqlAPIServiceArguments.limit = limit;
+    }
+    if (nextToken) {
+      gqlAPIServiceArguments.nextToken = nextToken;
+    }
+    if (lastSync) {
+      gqlAPIServiceArguments.lastSync = lastSync;
+    }
     const response = (await API.graphql(
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
-    return <GetChemicalQuery>response.data.getChemical;
+    return <SyncAssaysQuery>response.data.syncAssays;
   }
   async ListChemicals(
     filter?: ModelChemicalFilterInput,
@@ -1421,18 +1770,24 @@ export class APIService {
             cid
             cas
             iupac
-            inchikey
-            other_names
+            inchiKey
+            otherNames
             smiles
             mw
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+            version
             assays {
               __typename
               nextToken
+              startedAt
             }
-            createdAt
-            updatedAt
           }
           nextToken
+          startedAt
         }
       }`;
     const gqlAPIServiceArguments: any = {};
@@ -1449,6 +1804,107 @@ export class APIService {
       graphqlOperation(statement, gqlAPIServiceArguments)
     )) as any;
     return <ListChemicalsQuery>response.data.listChemicals;
+  }
+  async GetChemical(id: string): Promise<GetChemicalQuery> {
+    const statement = `query GetChemical($id: ID!) {
+        getChemical(id: $id) {
+          __typename
+          id
+          cid
+          cas
+          iupac
+          inchiKey
+          otherNames
+          smiles
+          mw
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+          version
+          assays {
+            __typename
+            items {
+              __typename
+              id
+              type
+              species
+              pmids
+              comment
+              chemicalID
+              _version
+              _deleted
+              _lastChangedAt
+              createdAt
+              updatedAt
+              version
+            }
+            nextToken
+            startedAt
+          }
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {
+      id
+    };
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <GetChemicalQuery>response.data.getChemical;
+  }
+  async SyncChemicals(
+    filter?: ModelChemicalFilterInput,
+    limit?: number,
+    nextToken?: string,
+    lastSync?: number
+  ): Promise<SyncChemicalsQuery> {
+    const statement = `query SyncChemicals($filter: ModelChemicalFilterInput, $limit: Int, $nextToken: String, $lastSync: AWSTimestamp) {
+        syncChemicals(filter: $filter, limit: $limit, nextToken: $nextToken, lastSync: $lastSync) {
+          __typename
+          items {
+            __typename
+            id
+            cid
+            cas
+            iupac
+            inchiKey
+            otherNames
+            smiles
+            mw
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+            version
+            assays {
+              __typename
+              nextToken
+              startedAt
+            }
+          }
+          nextToken
+          startedAt
+        }
+      }`;
+    const gqlAPIServiceArguments: any = {};
+    if (filter) {
+      gqlAPIServiceArguments.filter = filter;
+    }
+    if (limit) {
+      gqlAPIServiceArguments.limit = limit;
+    }
+    if (nextToken) {
+      gqlAPIServiceArguments.nextToken = nextToken;
+    }
+    if (lastSync) {
+      gqlAPIServiceArguments.lastSync = lastSync;
+    }
+    const response = (await API.graphql(
+      graphqlOperation(statement, gqlAPIServiceArguments)
+    )) as any;
+    return <SyncChemicalsQuery>response.data.syncChemicals;
   }
   OnCreateAssayListener: Observable<
     SubscriptionResponse<OnCreateAssaySubscription>
@@ -1476,25 +1932,34 @@ export class APIService {
           pmids
           comment
           chemicalID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+          version
           chemical {
             __typename
             id
             cid
             cas
             iupac
-            inchikey
-            other_names
+            inchiKey
+            otherNames
             smiles
             mw
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+            version
             assays {
               __typename
               nextToken
+              startedAt
             }
-            createdAt
-            updatedAt
           }
-          createdAt
-          updatedAt
         }
       }`
     )
@@ -1526,25 +1991,34 @@ export class APIService {
           pmids
           comment
           chemicalID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+          version
           chemical {
             __typename
             id
             cid
             cas
             iupac
-            inchikey
-            other_names
+            inchiKey
+            otherNames
             smiles
             mw
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+            version
             assays {
               __typename
               nextToken
+              startedAt
             }
-            createdAt
-            updatedAt
           }
-          createdAt
-          updatedAt
         }
       }`
     )
@@ -1576,25 +2050,34 @@ export class APIService {
           pmids
           comment
           chemicalID
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+          version
           chemical {
             __typename
             id
             cid
             cas
             iupac
-            inchikey
-            other_names
+            inchiKey
+            otherNames
             smiles
             mw
+            _version
+            _deleted
+            _lastChangedAt
+            createdAt
+            updatedAt
+            version
             assays {
               __typename
               nextToken
+              startedAt
             }
-            createdAt
-            updatedAt
           }
-          createdAt
-          updatedAt
         }
       }`
     )
@@ -1611,10 +2094,16 @@ export class APIService {
           cid
           cas
           iupac
-          inchikey
-          other_names
+          inchiKey
+          otherNames
           smiles
           mw
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+          version
           assays {
             __typename
             items {
@@ -1625,13 +2114,16 @@ export class APIService {
               pmids
               comment
               chemicalID
+              _version
+              _deleted
+              _lastChangedAt
               createdAt
               updatedAt
+              version
             }
             nextToken
+            startedAt
           }
-          createdAt
-          updatedAt
         }
       }`
     )
@@ -1648,10 +2140,16 @@ export class APIService {
           cid
           cas
           iupac
-          inchikey
-          other_names
+          inchiKey
+          otherNames
           smiles
           mw
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+          version
           assays {
             __typename
             items {
@@ -1662,13 +2160,16 @@ export class APIService {
               pmids
               comment
               chemicalID
+              _version
+              _deleted
+              _lastChangedAt
               createdAt
               updatedAt
+              version
             }
             nextToken
+            startedAt
           }
-          createdAt
-          updatedAt
         }
       }`
     )
@@ -1685,10 +2186,16 @@ export class APIService {
           cid
           cas
           iupac
-          inchikey
-          other_names
+          inchiKey
+          otherNames
           smiles
           mw
+          _version
+          _deleted
+          _lastChangedAt
+          createdAt
+          updatedAt
+          version
           assays {
             __typename
             items {
@@ -1699,13 +2206,16 @@ export class APIService {
               pmids
               comment
               chemicalID
+              _version
+              _deleted
+              _lastChangedAt
               createdAt
               updatedAt
+              version
             }
             nextToken
+            startedAt
           }
-          createdAt
-          updatedAt
         }
       }`
     )

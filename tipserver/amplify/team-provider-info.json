@@ -22,7 +22,7 @@
         },
         "GraphQLResolver": {
           "deploymentBucketName": "amplify-tipserver-devtwo-11156-deployment",
-          "s3Key": "amplify-builds/GraphQLResolver-597653534d5a6d4d707a-build.zip"
+          "s3Key": "amplify-builds/GraphQLResolver-3070344a395a58316c79-build.zip"
         }
       }
     }

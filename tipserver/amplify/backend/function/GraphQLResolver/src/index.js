@@ -2,7 +2,7 @@
 * @Author: fangzhouli
 * @Date:   2021-04-10 16:32:07
 * @Last Modified by:   fangzhouli
-* @Last Modified time: 2021-04-27 14:05:40
+* @Last Modified time: 2021-05-06 01:41:38
 */
 
 const resolvers = {
@@ -12,8 +12,8 @@ const resolvers = {
       message: null
     };
 
-    if (args.cid === undefined && args.cas === undefined &&
-        args.iupac === undefined && args.inchiKey === undefined) {
+    if (args.cid !== undefined || args.cas !== undefined
+        || args.inchiKey !== undefined) {
       // At least one publicly universal identifier is available.
 
       // TODO:
@@ -23,8 +23,8 @@ const resolvers = {
       response.message = "Success!";
     } else {
       // Non-publicly indentifiable data, so users have to provide data.
-      if (args.otherNames === undefined || args.smiles === undefined ||
-          args.mw === undefined) {
+      if (args.iupac === undefined && args.otherNames === undefined
+          && args.smiles === undefined && args.mw === undefined) {
         response.status = 400;
         response.message = "ChemicalInputError: Chemicals with no public" +
         " identifier must have 'common_names', 'smiles', and 'mw' filled."

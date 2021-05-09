@@ -18,23 +18,32 @@ subscription OnCreateAssay {
     pmids
     comment
     chemicalID
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+    version
     chemical {
       id
       cid
       cas
       iupac
-      inchikey
-      other_names
+      inchiKey
+      otherNames
       smiles
       mw
-      assays {
-        nextToken
-      }
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
+      version
+      assays {
+        nextToken
+        startedAt
+      }
     }
-    createdAt
-    updatedAt
   }
 }
 subscription OnUpdateAssay {
@@ -56,23 +65,32 @@ subscription OnUpdateAssay {
     pmids
     comment
     chemicalID
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+    version
     chemical {
       id
       cid
       cas
       iupac
-      inchikey
-      other_names
+      inchiKey
+      otherNames
       smiles
       mw
-      assays {
-        nextToken
-      }
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
+      version
+      assays {
+        nextToken
+        startedAt
+      }
     }
-    createdAt
-    updatedAt
   }
 }
 subscription OnDeleteAssay {
@@ -94,23 +112,32 @@ subscription OnDeleteAssay {
     pmids
     comment
     chemicalID
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+    version
     chemical {
       id
       cid
       cas
       iupac
-      inchikey
-      other_names
+      inchiKey
+      otherNames
       smiles
       mw
-      assays {
-        nextToken
-      }
+      _version
+      _deleted
+      _lastChangedAt
       createdAt
       updatedAt
+      version
+      assays {
+        nextToken
+        startedAt
+      }
     }
-    createdAt
-    updatedAt
   }
 }
 subscription OnCreateChemical {
@@ -119,10 +146,16 @@ subscription OnCreateChemical {
     cid
     cas
     iupac
-    inchikey
-    other_names
+    inchiKey
+    otherNames
     smiles
     mw
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+    version
     assays {
       items {
         id
@@ -131,13 +164,16 @@ subscription OnCreateChemical {
         pmids
         comment
         chemicalID
+        _version
+        _deleted
+        _lastChangedAt
         createdAt
         updatedAt
+        version
       }
       nextToken
+      startedAt
     }
-    createdAt
-    updatedAt
   }
 }
 subscription OnUpdateChemical {
@@ -146,10 +182,16 @@ subscription OnUpdateChemical {
     cid
     cas
     iupac
-    inchikey
-    other_names
+    inchiKey
+    otherNames
     smiles
     mw
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+    version
     assays {
       items {
         id
@@ -158,13 +200,16 @@ subscription OnUpdateChemical {
         pmids
         comment
         chemicalID
+        _version
+        _deleted
+        _lastChangedAt
         createdAt
         updatedAt
+        version
       }
       nextToken
+      startedAt
     }
-    createdAt
-    updatedAt
   }
 }
 subscription OnDeleteChemical {
@@ -173,10 +218,16 @@ subscription OnDeleteChemical {
     cid
     cas
     iupac
-    inchikey
-    other_names
+    inchiKey
+    otherNames
     smiles
     mw
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+    version
     assays {
       items {
         id
@@ -185,12 +236,15 @@ subscription OnDeleteChemical {
         pmids
         comment
         chemicalID
+        _version
+        _deleted
+        _lastChangedAt
         createdAt
         updatedAt
+        version
       }
       nextToken
+      startedAt
     }
-    createdAt
-    updatedAt
   }
 }

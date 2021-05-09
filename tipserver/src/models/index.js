@@ -4,10 +4,12 @@ import { schema } from './schema';
 
 
 
-const { Blog, Post, Comment } = initSchema(schema);
+const { Assay, Chemical, Response, EnzymaticAssayData, AhrAssayData } = initSchema(schema);
 
 export {
-  Blog,
-  Post,
-  Comment
+  Assay,
+  Chemical,
+  Response,
+  EnzymaticAssayData,
+  AhrAssayData
 };
