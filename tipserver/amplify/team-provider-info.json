@@ -1,0 +1,30 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-tipserver-dev-190100-authRole",
+      "UnauthRoleArn": "arn:aws:iam::105315678677:role/amplify-tipserver-dev-190100-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::105315678677:role/amplify-tipserver-dev-190100-authRole",
+      "Region": "us-west-2",
+      "DeploymentBucketName": "amplify-tipserver-dev-190100-deployment",
+      "UnauthRoleName": "amplify-tipserver-dev-190100-unauthRole",
+      "StackName": "amplify-tipserver-dev-190100",
+      "StackId": "arn:aws:cloudformation:us-west-2:105315678677:stack/amplify-tipserver-dev-190100/e585eef0-b0f8-11eb-b118-0a19cd36b067",
+      "AmplifyAppId": "d3k854yawandhi"
+    },
+    "categories": {
+      "auth": {
+        "tipservere279f686": {}
+      },
+      "function": {
+        "tipserverb8bceb9fDefineAuthChallenge": {
+          "deploymentBucketName": "amplify-tipserver-dev-190100-deployment",
+          "s3Key": "amplify-builds/tipserverb8bceb9fDefineAuthChallenge-4a3946434c7647726846-build.zip"
+        },
+        "GraphQLResolver": {
+          "deploymentBucketName": "amplify-tipserver-dev-190100-deployment",
+          "s3Key": "amplify-builds/GraphQLResolver-3070344a395a58316c79-build.zip"
+        }
+      }
+    }
+  }
+}

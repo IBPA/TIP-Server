@@ -1,0 +1,250 @@
+# this is an auto generated file. This will be overwritten
+subscription OnCreateAssay {
+  onCreateAssay {
+    id
+    type
+    enzymeData {
+      protein
+      gene
+      concentrationSubstrate
+      concentrationTested
+      inhibition
+      ec50
+    }
+    ahrData {
+      ahrType
+    }
+    species
+    pmids
+    comment
+    chemicalID
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+    version
+    chemical {
+      id
+      cid
+      cas
+      iupac
+      inchiKey
+      otherNames
+      smiles
+      mw
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      version
+      assays {
+        nextToken
+        startedAt
+      }
+    }
+  }
+}
+subscription OnUpdateAssay {
+  onUpdateAssay {
+    id
+    type
+    enzymeData {
+      protein
+      gene
+      concentrationSubstrate
+      concentrationTested
+      inhibition
+      ec50
+    }
+    ahrData {
+      ahrType
+    }
+    species
+    pmids
+    comment
+    chemicalID
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+    version
+    chemical {
+      id
+      cid
+      cas
+      iupac
+      inchiKey
+      otherNames
+      smiles
+      mw
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      version
+      assays {
+        nextToken
+        startedAt
+      }
+    }
+  }
+}
+subscription OnDeleteAssay {
+  onDeleteAssay {
+    id
+    type
+    enzymeData {
+      protein
+      gene
+      concentrationSubstrate
+      concentrationTested
+      inhibition
+      ec50
+    }
+    ahrData {
+      ahrType
+    }
+    species
+    pmids
+    comment
+    chemicalID
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+    version
+    chemical {
+      id
+      cid
+      cas
+      iupac
+      inchiKey
+      otherNames
+      smiles
+      mw
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      version
+      assays {
+        nextToken
+        startedAt
+      }
+    }
+  }
+}
+subscription OnCreateChemical {
+  onCreateChemical {
+    id
+    cid
+    cas
+    iupac
+    inchiKey
+    otherNames
+    smiles
+    mw
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+    version
+    assays {
+      items {
+        id
+        type
+        species
+        pmids
+        comment
+        chemicalID
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        version
+      }
+      nextToken
+      startedAt
+    }
+  }
+}
+subscription OnUpdateChemical {
+  onUpdateChemical {
+    id
+    cid
+    cas
+    iupac
+    inchiKey
+    otherNames
+    smiles
+    mw
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+    version
+    assays {
+      items {
+        id
+        type
+        species
+        pmids
+        comment
+        chemicalID
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        version
+      }
+      nextToken
+      startedAt
+    }
+  }
+}
+subscription OnDeleteChemical {
+  onDeleteChemical {
+    id
+    cid
+    cas
+    iupac
+    inchiKey
+    otherNames
+    smiles
+    mw
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+    version
+    assays {
+      items {
+        id
+        type
+        species
+        pmids
+        comment
+        chemicalID
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        version
+      }
+      nextToken
+      startedAt
+    }
+  }
+}

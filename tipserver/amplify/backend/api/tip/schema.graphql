@@ -1,0 +1,46 @@
+type EnzymaticAssayData {
+  protein: String
+  gene: String
+  concentrationSubstrate: Float
+  concentrationTested: Float
+  inhibition: Float
+  ec50: String
+}
+
+type AhrAssayData {
+  ahrType: String
+}
+
+type Assay @model @versioned @key(name: "byChemical", fields: ["chemicalID"]) @auth(rules: [{allow: public}]) {
+  id: ID!
+  type: String!
+  enzymeData: EnzymaticAssayData
+  ahrData: AhrAssayData
+  species: String
+  pmids: [Int]
+  comment: String
+  chemicalID: ID!
+  chemical: Chemical @connection(fields: ["chemicalID"])
+}
+
+type Chemical @model @versioned @auth(rules: [{allow: public}]) {
+  id: ID!
+  cid: Int
+  cas: String
+  iupac: String
+  inchiKey: String
+  otherNames: [String]
+  smiles: String
+  mw: Float
+  assays: [Assay] @connection(keyName: "byChemical", fields: ["id"])
+}
+
+type Query {
+  validateAssay(type: String!, protein: String, gene: String, concentrationSubstrate: Float, concentrationTested: Float, inhibition: Float, ec50: String, ahrType: String, species: String, pmids: [Int], comment: String): Response! @function(name: "GraphQLResolver-${env}")
+  validateChemical(cid: Int, cas: String, iupac: String, inchiKey: String, otherNames: [String], smiles: String, mw: Float): Response! @function(name: "GraphQLResolver-${env}")
+}
+
+type Response {
+  status: Int!
+  message: String
+}

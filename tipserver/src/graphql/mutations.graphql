@@ -1,0 +1,268 @@
+# this is an auto generated file. This will be overwritten
+mutation CreateAssay(
+  $input: CreateAssayInput!
+  $condition: ModelAssayConditionInput
+) {
+  createAssay(input: $input, condition: $condition) {
+    id
+    type
+    enzymeData {
+      protein
+      gene
+      concentrationSubstrate
+      concentrationTested
+      inhibition
+      ec50
+    }
+    ahrData {
+      ahrType
+    }
+    species
+    pmids
+    comment
+    chemicalID
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+    version
+    chemical {
+      id
+      cid
+      cas
+      iupac
+      inchiKey
+      otherNames
+      smiles
+      mw
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      version
+      assays {
+        nextToken
+        startedAt
+      }
+    }
+  }
+}
+mutation UpdateAssay(
+  $input: UpdateAssayInput!
+  $condition: ModelAssayConditionInput
+) {
+  updateAssay(input: $input, condition: $condition) {
+    id
+    type
+    enzymeData {
+      protein
+      gene
+      concentrationSubstrate
+      concentrationTested
+      inhibition
+      ec50
+    }
+    ahrData {
+      ahrType
+    }
+    species
+    pmids
+    comment
+    chemicalID
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+    version
+    chemical {
+      id
+      cid
+      cas
+      iupac
+      inchiKey
+      otherNames
+      smiles
+      mw
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      version
+      assays {
+        nextToken
+        startedAt
+      }
+    }
+  }
+}
+mutation DeleteAssay(
+  $input: DeleteAssayInput!
+  $condition: ModelAssayConditionInput
+) {
+  deleteAssay(input: $input, condition: $condition) {
+    id
+    type
+    enzymeData {
+      protein
+      gene
+      concentrationSubstrate
+      concentrationTested
+      inhibition
+      ec50
+    }
+    ahrData {
+      ahrType
+    }
+    species
+    pmids
+    comment
+    chemicalID
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+    version
+    chemical {
+      id
+      cid
+      cas
+      iupac
+      inchiKey
+      otherNames
+      smiles
+      mw
+      _version
+      _deleted
+      _lastChangedAt
+      createdAt
+      updatedAt
+      version
+      assays {
+        nextToken
+        startedAt
+      }
+    }
+  }
+}
+mutation CreateChemical(
+  $input: CreateChemicalInput!
+  $condition: ModelChemicalConditionInput
+) {
+  createChemical(input: $input, condition: $condition) {
+    id
+    cid
+    cas
+    iupac
+    inchiKey
+    otherNames
+    smiles
+    mw
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+    version
+    assays {
+      items {
+        id
+        type
+        species
+        pmids
+        comment
+        chemicalID
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        version
+      }
+      nextToken
+      startedAt
+    }
+  }
+}
+mutation UpdateChemical(
+  $input: UpdateChemicalInput!
+  $condition: ModelChemicalConditionInput
+) {
+  updateChemical(input: $input, condition: $condition) {
+    id
+    cid
+    cas
+    iupac
+    inchiKey
+    otherNames
+    smiles
+    mw
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+    version
+    assays {
+      items {
+        id
+        type
+        species
+        pmids
+        comment
+        chemicalID
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        version
+      }
+      nextToken
+      startedAt
+    }
+  }
+}
+mutation DeleteChemical(
+  $input: DeleteChemicalInput!
+  $condition: ModelChemicalConditionInput
+) {
+  deleteChemical(input: $input, condition: $condition) {
+    id
+    cid
+    cas
+    iupac
+    inchiKey
+    otherNames
+    smiles
+    mw
+    _version
+    _deleted
+    _lastChangedAt
+    createdAt
+    updatedAt
+    version
+    assays {
+      items {
+        id
+        type
+        species
+        pmids
+        comment
+        chemicalID
+        _version
+        _deleted
+        _lastChangedAt
+        createdAt
+        updatedAt
+        version
+      }
+      nextToken
+      startedAt
+    }
+  }
+}

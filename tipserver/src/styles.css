@@ -1,0 +1,21 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
+.mat-button-toggle-label-content {
+  line-height: 30px !important;
+}
+
+.pageContent {
+  padding: 20px;
+}
+
+.pageDiv {
+  background-color: #dcdcdc;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.ng-click {
+  cursor: pointer;
+}

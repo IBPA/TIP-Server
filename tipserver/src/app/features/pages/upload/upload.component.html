@@ -1,0 +1,37 @@
+<div class="pageContent">
+  <div class="pageDiv pageUpdateDiv">
+    <h2>Instructions</h2>
+    <p><b>Step 1</b>: Download <i>example.xlsx</i> and open it. The first
+      sheet, "Guide", includes an example and also some specification for each
+      field.
+    </p>
+    <p><b>Step 2</b>: Open the second sheet, "Template", and fill compound and
+      assay columns. If a compound has multiple assays, only fill assay columns
+      for the following rows. See the example in "Guide" for details.
+    </p>
+    <p><b>Step 3</b>: Save only "Template" sheet as a <i>.csv</i> file. Note
+      that a CSV file can only have one sheet.
+    </p>
+    <p><b>Step 4</b>: Upload your newly saved CSV file. If there are errors,
+      you will be notified. Fix the errors and upload.
+    </p>
+    <!-- <button mat-raised-button matTooltip="Click to download"
+            (click)="downloadTemplate()" id="buttonDownload">
+      <mat-icon title="Download as CSV">save_alt</mat-icon>
+      Download example.xlsx
+    </button> -->
+  </div>
+  <br />
+  <div class="pageDiv pageUpdateDiv">
+    <form [formGroup]="formGroup" novalidate (ngSubmit)="onSubmit()" id="formUpload">
+      <select [(ngModel)]="uploadDataType" [ngModelOptions]="{standalone: true}">
+        <option>AhR</option>
+        <option>Enzyme</option>
+      </select>
+      <input type="file" (change)="onFileChange($event)" />
+      <button class="btn btn-outline-primary" type="submit" [disabled]="formGroup.invalid || formGroup.pristine">
+        Upload
+      </button>
+    </form>
+  </div>
+</div>
