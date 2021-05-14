@@ -10,9 +10,6 @@ import { AuthService } from '../../../core/services/auth.service';
 })
 export class LoginComponent implements OnInit {
   public loginForm!: FormGroup;
-  public signupForm!: FormGroup;
-  public confirmationForm!: FormGroup;
-  public successfullySignup!: boolean;
 
   constructor(
     private fb: FormBuilder,
@@ -28,16 +25,6 @@ export class LoginComponent implements OnInit {
     this.loginForm = this.fb.group({
       'email': ['', Validators.required],
       'password': ['', Validators.required]
-    });
-
-    this.signupForm = this.fb.group({
-      'email': ['', Validators.required],
-      'password': ['', Validators.required]
-    });
-
-    this.confirmationForm = this.fb.group({
-      'email': ['', Validators.required],
-      'confirmationCode': ['', Validators.required]
     });
   }
 
