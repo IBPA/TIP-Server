@@ -9,12 +9,18 @@ import { HeaderComponent } from './features/header/header.component';
 import { HomeComponent } from './features/pages/home/home.component';
 import { SearchComponent } from './features/pages/search/search.component';
 import { UploadComponent } from './features/pages/upload/upload.component';
+import { LoginComponent } from './features/pages/login/login.component';
+import { SignupComponent } from './features/pages/signup/signup.component';
+import { AuthService } from './core/services/auth.service';
+import { AuthGuard } from './core/guards/auth.guard';
 
 const routes: Routes = [
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'search', component: SearchComponent },
-  { path: 'upload', component: UploadComponent },
-  { path: '', component: HomeComponent }
+  { path: 'upload', component: UploadComponent, canActivate: [AuthGuard] },
+  { path: 'login', component: LoginComponent },
+  { path: 'signup', component: SignupComponent },
 ];
 
 @NgModule({
@@ -24,6 +30,8 @@ const routes: Routes = [
     HomeComponent,
     SearchComponent,
     UploadComponent,
+    LoginComponent,
+    SignupComponent,
   ],
   imports: [
     AmplifyUIAngularModule,
@@ -32,7 +40,10 @@ const routes: Routes = [
     ReactiveFormsModule,
     RouterModule.forRoot(routes)
   ],
-  providers: [],
+  providers: [
+    AuthService,
+    AuthGuard,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
