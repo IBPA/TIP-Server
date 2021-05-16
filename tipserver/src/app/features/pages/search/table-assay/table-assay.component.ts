@@ -1,48 +1,43 @@
-/**
- * TODO
- *   - interface
- *   - isAllSelected()
- *   - onExport()
- *   - dataTYpe
+/*
+  TODO:
+    - Authorized users are allowed to edit data.
  */
-// import * as FileSaver from 'file-saver';
 import { ViewChild, ElementRef } from '@angular/core';
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { SelectionModel } from '@angular/cdk/collections';
 import { APIService } from '@app/core/services/API.service';
 
-// import { jsonArrayToCsv } from '@app/shared/utils/csv';
-
-// export interface CompoundElement {
-//   _id: number;
-//   common_names: string[];
-//   iupac_name: string;
-//   cid: number;
-//   cas: string;
-//   comment: string;
-// }
+// import { SelectionModel } from '@angular/cdk/collections';
 
 @Component({
-  selector: 'search',
-  templateUrl: './search.component.html',
-  styleUrls: ['./search.component.css']
+  selector: 'table-assay',
+  templateUrl: './table-assay.component.html',
+  styleUrls: ['./table-assay.component.css']
 })
-export class SearchComponent implements OnInit {
+export class TableAssayComponent implements OnInit {
   filter = "";
-  dataType = 'compound'
-  isEditing = false;
-  selection = new SelectionModel(true, []);
-  dataSource = new MatTableDataSource();
-  displayedColumns = ['select', 'id', 'names', 'cid', 'cas', 'action'];
+  dataSource: any = new MatTableDataSource();
+  displayedColumns = ['chemical', 'ahrType', 'protein', 'gene', 'concTested',
+                      'concSubstrate', 'inhibition', 'ec50', 'species',
+                      'pmids', 'comment'];
+  // assayType = 'AhR';
+  // displayedColumnsAhr = ['chemical', 'ahrType', 'species', 'pmids', 'comment'];
+  // displayedColumnsEnzyme = ['chemical', 'protein', 'gene', 'concTested',
+  //                           'concSubstrate', 'inhibition', 'ec50', 'species'];
+  // isEditing = false;
+  // selection = new SelectionModel(true, []);
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild('updateInput') updateInput!: ElementRef;
 
   constructor(private service: APIService) { }
 
-  ngOnInit(): void {
+  async ngOnInit() {
+    let res = await this.service.ListAssays(
+      undefined, 20000);
+    this.dataSource.data = res.items;
+    // console.log(res.items)
     // this.service.get()
     //   .subscribe(res => {
     //     this.dataSource.data = res;
@@ -52,9 +47,9 @@ export class SearchComponent implements OnInit {
     //   })
   }
 
-  // ngAfterViewInit() {
-  //   this.dataSource.paginator = this.paginator;
-  // }
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+  }
 
   onFilter(filter: any) {
     this.dataSource.filter = this.filter;
@@ -66,12 +61,12 @@ export class SearchComponent implements OnInit {
   // }
 
   // onSave(row) {
-  //   row.common_names = this.updateInput.nativeElement.value;
+  //   row.species = this.updateInput.nativeElement.value;
   //   row.isEditing = false;
   //   this.isEditing = false;
 
   //   let updatedFields = {
-  //     'common_names': row.common_names
+  //     'species': row.species
   //   };
 
   //   this.service.put(row._id, updatedFields)
@@ -97,15 +92,15 @@ export class SearchComponent implements OnInit {
   //   this.dataSource._updateChangeSubscription();
   //   this.isEditing = false;
 
-  //   // this.service.delete(id)
-  //   //   .subscribe(res => {
-  //   //     console.log(res);
-  //   //   });
+  //   this.service.delete(id)
+  //     .subscribe(res => {
+  //       console.log(res);
+  //     });
   // }
 
   // onExport() {
-  //   const keys = ['cid', 'cas', 'common_names', 'iupac_name', 'mw',
-  //                 'comment'];
+  //   const keys = ['protein', 'gene', 'ahr_type', 'species', 'conc_substrate',
+  //                 'conc_tested','inhibition', 'ec50', 'pmid', 'comment2'];
   //   let blob = new Blob(
   //     [jsonArrayToCsv(this.selection.selected, keys)], { type: 'text/csv' });
   //   FileSaver.saveAs(blob, 'export.csv');
@@ -140,7 +135,7 @@ export class SearchComponent implements OnInit {
   //     row${row.position + 1}`;
   // }
 
-  selectDataType(event: any) {
-    this.dataType = event.target.value;
-  }
+  // selectDataType(event) {
+  //   this.dataType = event.target.value;
+  // }
 }

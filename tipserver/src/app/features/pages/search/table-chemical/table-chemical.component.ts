@@ -1,48 +1,37 @@
 /**
  * TODO
- *   - interface
- *   - isAllSelected()
- *   - onExport()
- *   - dataTYpe
+ *   - Authorized users are allowed to edit data.
  */
-// import * as FileSaver from 'file-saver';
 import { ViewChild, ElementRef } from '@angular/core';
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { SelectionModel } from '@angular/cdk/collections';
 import { APIService } from '@app/core/services/API.service';
 
-// import { jsonArrayToCsv } from '@app/shared/utils/csv';
-
-// export interface CompoundElement {
-//   _id: number;
-//   common_names: string[];
-//   iupac_name: string;
-//   cid: number;
-//   cas: string;
-//   comment: string;
-// }
+// import { SelectionModel } from '@angular/cdk/collections';
 
 @Component({
-  selector: 'search',
-  templateUrl: './search.component.html',
-  styleUrls: ['./search.component.css']
+  selector: 'table-chemical',
+  templateUrl: './table-chemical.component.html',
+  styleUrls: ['./table-chemical.component.css']
 })
-export class SearchComponent implements OnInit {
+export class TableChemicalComponent implements OnInit {
   filter = "";
-  dataType = 'compound'
-  isEditing = false;
-  selection = new SelectionModel(true, []);
-  dataSource = new MatTableDataSource();
-  displayedColumns = ['select', 'id', 'names', 'cid', 'cas', 'action'];
+  dataSource: any = new MatTableDataSource();
+  displayedColumns = ['otherNames', 'cid', 'cas', 'inchiKey', 'iupac',
+                      'smiles', 'mw'];
+  // isEditing = false;
+  // selection = new SelectionModel(true, []);
+  // displayedColumns = ['select', 'id', 'names', 'cid', 'cas', 'action'];
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild('updateInput') updateInput!: ElementRef;
 
   constructor(private service: APIService) { }
 
-  ngOnInit(): void {
+  async ngOnInit() {
+    let res = await this.service.ListChemicals(undefined, 5000);
+    this.dataSource.data = res.items;
     // this.service.get()
     //   .subscribe(res => {
     //     this.dataSource.data = res;
@@ -52,9 +41,9 @@ export class SearchComponent implements OnInit {
     //   })
   }
 
-  // ngAfterViewInit() {
-  //   this.dataSource.paginator = this.paginator;
-  // }
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+  }
 
   onFilter(filter: any) {
     this.dataSource.filter = this.filter;
@@ -97,10 +86,10 @@ export class SearchComponent implements OnInit {
   //   this.dataSource._updateChangeSubscription();
   //   this.isEditing = false;
 
-  //   // this.service.delete(id)
-  //   //   .subscribe(res => {
-  //   //     console.log(res);
-  //   //   });
+  //   this.service.delete(id)
+  //     .subscribe(res => {
+  //       console.log(res);
+  //     });
   // }
 
   // onExport() {
@@ -140,7 +129,7 @@ export class SearchComponent implements OnInit {
   //     row${row.position + 1}`;
   // }
 
-  selectDataType(event: any) {
-    this.dataType = event.target.value;
-  }
+  // selectDataType(event) {
+  //   this.dataType = event.target.value;
+  // }
 }
