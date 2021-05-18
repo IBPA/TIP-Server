@@ -28,6 +28,6 @@
 - Basic user authentication through Amazon Cognito added.
 - Data migration to AWS Amplify using GraphQL complete.
 - Search page for chemical and assay implemented.
-- Download page to dump the data as .csv implemented.
+- Download page to dump the data as .zip implemented.
 
 <!-- [1.0.0]: https://github.com/olivierlacan/keep-a-changelog/releases/tag/v0.0.1 -->
