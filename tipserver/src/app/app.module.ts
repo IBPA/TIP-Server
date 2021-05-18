@@ -5,6 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule, Routes } from '@angular/router';
 import { AmplifyUIAngularModule } from '@aws-amplify/ui-angular';
 
+import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -19,11 +20,13 @@ import {
   TableChemicalComponent,
   TableAssayComponent
 } from './features/pages/search';
-import { UploadComponent } from './features/pages/upload/upload.component';
+import { DownloadComponent } from './features/pages/download/download.component';
 import { LoginComponent } from './features/pages/login/login.component';
 import { SignupComponent } from './features/pages/signup/signup.component';
 import { AuthService } from './core/services/auth.service';
 import { AuthGuard } from './core/guards/auth.guard';
+
+// import { UploadComponent } from './features/pages/upload/upload.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -31,9 +34,11 @@ const routes: Routes = [
   { path: 'search', component: TableChemicalComponent },
   { path: 'search/chemical', component: TableChemicalComponent },
   { path: 'search/assay', component: TableAssayComponent },
-  { path: 'upload', component: UploadComponent, canActivate: [AuthGuard] },
+  { path: 'download', component: DownloadComponent },
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
+
+  // { path: 'upload', component: UploadComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({
@@ -42,11 +47,12 @@ const routes: Routes = [
     HeaderComponent,
     HomeComponent,
     SearchComponent,
-    UploadComponent,
+    // UploadComponent,
     LoginComponent,
     SignupComponent,
     TableChemicalComponent,
     TableAssayComponent,
+    DownloadComponent,
   ],
   imports: [
     AmplifyUIAngularModule,
@@ -54,6 +60,7 @@ const routes: Routes = [
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
+    MatIconModule,
     MatInputModule,
     MatTableModule,
     MatToolbarModule,

@@ -1,0 +1,40 @@
+<div class="pageContent">
+  <!-- <div class="pageDiv pageDownloadDiv">
+    <mat-button-toggle-group name="dataType" aria-label="Data Type"
+                             value="all">
+      <mat-button-toggle value="all">All</mat-button-toggle>
+      <mat-button-toggle value="compound">Compound</mat-button-toggle>
+      <mat-button-toggle value="assay">Assay</mat-button-toggle>
+    </mat-button-toggle-group>
+  </div>
+  <br /> -->
+  <div class="pageDiv" id="divDownload">
+    <h3>Download</h3>
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>Version</th>
+        <th>Size</th>
+        <th>Download</th>
+      </tr>
+
+      <tr>
+        <td>All</td>
+        <td>1.0.0</td>
+        <td>2M</td>
+        <td>
+          <button matTooltip="Click to download"
+                  (click)="onDownload()" id="buttonDownload">
+            <span class="material-icons" title="Download as CSV"
+                  id="downloadIcon">save_alt</span>
+          </button>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <br />
+  <div class="pageDiv" id="divDownload">
+    <h3>Change Logs</h3>
+    <p>No recent changes.</p>
+  </div>
+</div>
