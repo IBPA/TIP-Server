@@ -23,9 +23,20 @@ export class DownloadComponent implements OnInit {
   }
 
   async prepareAhrAssaysCsv() {
-    let res = await this.service.ListAssays(
-      { type: { eq: 'AhR' } }, 20000);
-    let assays = res!.items!;
+    let assays: any = [];
+    let nextToken = undefined;
+    while (true) {
+      let res: any = await this.service.ListAssays(
+        { type: { eq: 'AhR' } }, 20000, nextToken);
+      assays = assays.concat(res!.items!);
+
+      if (res.nextToken === null) {
+        break;
+      } else {
+        nextToken = res.nextToken;
+      }
+    }
+
     let assaysJson = [];
     let columns = ['cid', 'cas', 'iupac', 'otherNames', 'smiles', 'mw',
                    'ahrType', 'species', 'pmids', 'comment'];
@@ -69,9 +80,20 @@ export class DownloadComponent implements OnInit {
   }
 
   async prepareEnzymeticAssaysCsv() {
-    let res = await this.service.ListAssays(
-      { type: { eq: 'Enzyme' } }, 20000);
-    let assays = res!.items!;
+    let assays: any = [];
+    let nextToken = undefined;
+    while (true) {
+      let res: any = await this.service.ListAssays(
+        { type: { eq: 'Enzyme' } }, 20000, nextToken);
+      assays = assays.concat(res!.items!);
+
+      if (res.nextToken === null) {
+        break;
+      } else {
+        nextToken = res.nextToken;
+      }
+    }
+
     let assaysJson = [];
     let columns = ['cid', 'cas', 'iupac', 'otherNames', 'smiles', 'mw',
                    'protein', 'gene', 'species', 'concentrationSubstrate',

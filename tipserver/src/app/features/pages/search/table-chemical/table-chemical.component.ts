@@ -30,8 +30,23 @@ export class TableChemicalComponent implements OnInit {
   constructor(private service: APIService) { }
 
   async ngOnInit() {
-    let res = await this.service.ListChemicals(undefined, 5000);
-    this.dataSource.data = res.items;
+    let nextToken = undefined;
+    this.dataSource.data = [];
+
+    while (true) {
+      let res: any = await this.service.ListChemicals(
+        undefined,
+        1000,
+        nextToken);
+
+      this.dataSource.data = this.dataSource.data.concat(res.items);
+
+      if (res.nextToken === null) {
+        break;
+      } else {
+        nextToken = res.nextToken;
+      }
+    }
     // this.service.get()
     //   .subscribe(res => {
     //     this.dataSource.data = res;

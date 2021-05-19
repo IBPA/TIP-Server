@@ -36,7 +36,7 @@
       <ng-container matColumnDef="chemical">
         <th mat-header-cell *matHeaderCellDef>Chemical</th>
         <td mat-cell *matCellDef="let row">
-          cid:{{row.chemical.cid}},cas:{{row.chemical.cas}}
+          {{row.chemicalString}}
         </td>
       </ng-container>
 

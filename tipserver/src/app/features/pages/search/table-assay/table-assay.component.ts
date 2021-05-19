@@ -34,9 +34,30 @@ export class TableAssayComponent implements OnInit {
   constructor(private service: APIService) { }
 
   async ngOnInit() {
-    let res = await this.service.ListAssays(
-      undefined, 20000);
-    this.dataSource.data = res.items;
+    let nextToken = undefined;
+    this.dataSource.data = [];
+
+    while (true) {
+      let res: any = await this.service.ListAssays(
+        undefined,
+        1000,
+        nextToken);
+
+      let data = res.items;
+      data.forEach((datum: any) => {
+        let cid = datum.chemical.cid;
+        let cas = datum.chemical.cas;
+        let names = datum.chemical.otherNames.join(';');
+        datum.chemicalString = "cid:" + cid + "/cas:" + cas + "/names:" + names;
+      })
+      this.dataSource.data = this.dataSource.data.concat(data);
+
+      if (res.nextToken === null) {
+        break;
+      } else {
+        nextToken = res.nextToken;
+      }
+    }
     // console.log(res.items)
     // this.service.get()
     //   .subscribe(res => {
